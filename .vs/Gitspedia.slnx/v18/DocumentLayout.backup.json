@@ -1,0 +1,96 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yusuf\\Websites\\Gitspedia\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|c:\\users\\yusuf\\websites\\gitspedia\\src\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|solutionrelative:src\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|c:\\users\\yusuf\\websites\\gitspedia\\src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|solutionrelative:src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|c:\\users\\yusuf\\websites\\gitspedia\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|solutionrelative:src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|c:\\users\\yusuf\\websites\\gitspedia\\src\\home.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{C063F22E-1044-D5C0-BF55-6A9FDB25F5FB}|gitspedia.esproj|solutionrelative:src\\home.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "home.css",
+              "DocumentMoniker": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\home.css",
+              "RelativeDocumentMoniker": "src\\home.css",
+              "ToolTip": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\home.css",
+              "RelativeToolTip": "src\\home.css",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-14T14:42:07.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "home.jsx",
+              "DocumentMoniker": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\home.jsx",
+              "RelativeDocumentMoniker": "src\\home.jsx",
+              "ToolTip": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\home.jsx",
+              "RelativeToolTip": "src\\home.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAKAQAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-04-14T14:41:14.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.css",
+              "DocumentMoniker": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\App.css",
+              "RelativeDocumentMoniker": "src\\App.css",
+              "ToolTip": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\App.css",
+              "RelativeToolTip": "src\\App.css",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAAH4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-14T14:39:45.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.jsx",
+              "DocumentMoniker": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\App.jsx",
+              "RelativeDocumentMoniker": "src\\App.jsx",
+              "ToolTip": "C:\\Users\\yusuf\\Websites\\Gitspedia\\src\\App.jsx",
+              "RelativeToolTip": "src\\App.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-04-14T14:19:31.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

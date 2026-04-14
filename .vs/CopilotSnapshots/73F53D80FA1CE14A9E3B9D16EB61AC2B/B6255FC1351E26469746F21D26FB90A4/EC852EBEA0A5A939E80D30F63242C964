@@ -1,0 +1,34 @@
+﻿import { Link } from "react-router-dom"
+import "../src/home.css"
+
+const Section = ({ title, description, links }) => {
+    return (
+        <>
+            <div className="display-section">
+                <div className="display-section-content">
+                    <div className="display-section-textbox">
+                        <h1>{title}</h1>
+                        <p>{description}</p>
+                    </div>
+                    <div className="display-section-buttons">
+                        {links.map(((link, title), index) => (
+                        <>
+                            <Link to={link} key={index} className="display-section-button">{title}</Link>
+                        </>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </>
+    )
+}
+const Home = () => {
+    return (
+        <>
+            
+        </>
+    )
+}
+
+export default Home

@@ -1,0 +1,41 @@
+h2 {
+    color: green;
+}
+a {
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: antiquewhite;
+    color: black;
+    transition: background-color 0.25s, color 0.25s;
+}
+a:hover {
+    background-color: black;
+    color: white;
+}
+.display-section {
+    background-color: rgb(74, 108, 108);
+    padding: 35px 6px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+.text-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 60%;
+}
+.text-box-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+input {
+    padding: 8px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 40%;
+}

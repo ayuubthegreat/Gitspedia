@@ -1,0 +1,32 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    margin-bottom: 20px;
+}
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+.nav-links a {
+    color: blue;
+    text-decoration: none;
+}
+.nav-links a:hover {
+    color: white;
+    text-decoration: underline;
+}
+.title-link {
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+.search-bar {
+    padding: 8px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 200px;
+}
