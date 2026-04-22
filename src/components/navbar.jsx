@@ -10,6 +10,7 @@ const  Navbar = () => {
             <div className="nav-links">
                 <Link to={"/about"}>About</Link>
                 <Link to={"/articles"}>Articles</Link>
+                <Link to={"/create"}>Create Article</Link>
             </div>
             <input className="search-bar" placeholder="Search"></input>
         </nav>

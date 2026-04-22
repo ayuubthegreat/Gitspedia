@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_DATA } from "../BASE_DATA";
 
 
 export const APICall = async ({endpoint, method = "GET", data = null}) => {
@@ -12,21 +13,21 @@ export const APICall = async ({endpoint, method = "GET", data = null}) => {
         return response.data
     } catch (error) {
         console.error("API call error:", error);
-        throw new Error("API call failed")
+        throw error;
     }
 }
-export const AsyncThunk = (endpoint, method = "GET", data = null) => createAsyncThunk(
-    endpoint,
-    async () => {
-        return await APICall({ endpoint, method, data });
-    }
-)
+
 
 export const LoadingCase = (state) => {
     state.loading = true
     state.error = null
 }
+export const Article_SuccessCase = (state, action) => {
+    state.loading = false
+    state.articles = action.payload.data
+}
 export const FailedCase = (state, action) => {
     state.loading = false
     state.error = action.error.message
+    console.error("Error:", action.error.message)
 }

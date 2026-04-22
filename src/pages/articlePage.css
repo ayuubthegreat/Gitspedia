@@ -1,0 +1,47 @@
+body {
+    line-height: 1.6;
+}
+
+.article-page-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0px;
+}
+.article-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+.separator {
+    height: 1px;
+    background-color: #212121;
+    margin: 10px 0;
+}
+.infobox {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    max-width: 600px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.infobox img {
+    max-width: 100%;
+    height: auto;
+}
+.infobox-field {
+    margin-bottom: 5px;
+}
+@media (max-width: 768px) {
+    .article-main-container {
+        flex-direction: column;
+    }
+    .infobox {
+        max-width: 100%;
+    }
+    
+}
