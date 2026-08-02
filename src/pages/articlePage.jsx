@@ -15,7 +15,6 @@ const ArticlePage = ({id}) => {
     if (!article) {
         return <p>Article not found.</p>
     }
-    console.log(article)
     return (
         <div className="article-page-container">
             <div className="article-page-actions">
@@ -28,8 +27,14 @@ const ArticlePage = ({id}) => {
             <div className="separator"></div>
             <div className="article-main-container">
                 <div className="article-main-content">
+                    <div className="article-header">
                      <h1>{article.title}</h1>
-
+                     {article.tags && article.tags.length > 0 && <div className="article-tags">
+                        {article.tags.map((tag, index) => (
+                            <span key={index} className="article-tag">{tag}</span>
+                        ))}
+                    </div>}
+                    </div>
                <div>
                     <p dangerouslySetInnerHTML={{ __html: toHTML(article.mainParagraph) }}></p>
                      <div className="infobox infobox-mobile">

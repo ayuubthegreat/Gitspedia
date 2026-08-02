@@ -24,4 +24,5 @@ export const articlePrototype = {
     paragraphs: [],
     titleImageLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Wikipedia-logo.png/600px-Wikipedia-logo.png",
     infoboxFields: [],
+    tags: [],
 }

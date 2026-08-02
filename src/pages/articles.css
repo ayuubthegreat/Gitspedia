@@ -34,7 +34,7 @@
     cursor: pointer;
 }
 
-.card-eyebrow {
+.card-tags .card-tag, .articles-tags-list .articles-tag {
     display: inline-flex;
     margin-bottom: 10px;
     border-radius: 999px;
@@ -45,6 +45,17 @@
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+}
+.articles-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.articles-tag-clear {
+    background: #945555;
+    color: #fff;
+    cursor: pointer;
 }
 
 .article-card h2 {

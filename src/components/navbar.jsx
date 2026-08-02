@@ -9,7 +9,7 @@ const  Navbar = () => {
         <>
         <nav className="top-nav">
             <Link to={"/"} className="brand-link">
-                <img src="src/assets/frame000000000000.png" width={180} alt="Gitspedia" />
+                <img src="https://1drv.ms/i/c/09e336c8c6cc3c06/IQQ8Hv59yB7qRqoQGRvkDaTAAYClMVcPtGz9ypq3L1GKcJI?width=720&height=480" width={180} alt="Gitspedia" />
             </Link>
             <div className="nav-links">
                 <Link className="nav-link" to={"/about"}>About</Link>

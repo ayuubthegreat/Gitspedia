@@ -80,6 +80,19 @@
 .infobox-mobile {
     display: none;
 }
+.article-tag {
+    display: inline-flex;
+    margin-bottom: 10px;
+    border-radius: 999px;
+    padding: 5px 10px;
+    background: #eaf4ec;
+    color: #2e5b46;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
 
 .infobox img {
     max-width: 100%;
@@ -92,6 +105,14 @@
     margin-bottom: 6px;
     border-top: 1px solid #d6e1d8;
     padding-top: 8px;
+}
+.article-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    overflow-x: scroll;
+    padding-bottom: 8px;
 }
 
 @media (max-width: 768px) {
