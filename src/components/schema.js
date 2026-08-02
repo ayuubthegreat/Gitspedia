@@ -23,7 +23,7 @@ export const articlePrototype = {
     mainParagraph: "",
     paragraphs: [],
     infobox: {
-        imageLink: "",
+        imageLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Wikipedia-logo.png/600px-Wikipedia-logo.png",
         fields: []
     }
 }

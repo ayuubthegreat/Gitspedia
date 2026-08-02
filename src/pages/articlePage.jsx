@@ -15,14 +15,15 @@ const ArticlePage = ({id}) => {
     if (!article) {
         return <p>Article not found.</p>
     }
+    console.log(article)
     return (
         <div className="article-page-container">
             <div className="article-page-actions">
-            <Link to={`/articles/editArticle/${article.id}`}>Edit Article</Link>
-            <a onClick={() => {
+            <Link className="article-action-link" to={`/articles/editArticle/${article.id}`}>Edit Article</Link>
+            <button className="article-action-delete" type="button" onClick={() => {
                 dispatch(DeleteArticle({id})).unwrap()
                 navigate("/");
-            }}>Delete Article</a>
+            }}>Delete Article</button>
             </div>
             <div className="separator"></div>
             <div className="article-main-container">

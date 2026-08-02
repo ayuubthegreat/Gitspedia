@@ -14,26 +14,31 @@ const TextBox = ({title, description, links, style}) => {
 }
 const Home = () => {
     return (
-        <>
-        <div className="display-section" style={{ backgroundImage: "url('../src/assets/react.svg')"}} >
+        <div className="home-page">
+        <div className="display-section display-hero" >
             <TextBox title="Welcome to Gitspedia" 
-            description="An 'official' studio encyclopedia.
-            Made proudly with React and Vite." 
-            links={[{name: "Learn More", path: "/about"}]} style={{ maxWidth: "60%" }} />
+            description="A studio encyclopedia built for clear writing, faster discovery, and collaborative project memory." 
+            links={[{name: "Learn More", path: "/about"}, {name: "Browse Articles", path: "/articles"}]} style={{ maxWidth: "720px" }} />
         </div>
-        <div className="display-section" style={{backgroundImage: "url('../src/assets/hero.png')", alignItems: "center"}}>
-            <TextBox title={"Official, but not biased"}
-            description="This encyclopedia is 'from the horse's mouth' when referring to our projects, but it has been filtered through a neutral lens to avoid bias."
-            links={[{name: "Policy", path: "/policy"}]}
-            style={{backgroundColor: "gray", color: "white"}}
+        <div className="display-section display-feature">
+            <TextBox title={"Official, but still objective"}
+            description="Articles come from teams closest to the work while maintaining neutral language for better onboarding and decision making."
+            links={[{name: "Read Policy", path: "/about"}]}
             />
         </div>
-        <div className="display-section" style={{alignItems: "center"}}>
-            <TextBox title={"Ready to Browse Our Worlds?"}
-            description="Dive in if you dare....."/>
-            <input placeholder="Search"></input>
+        <div className="display-section display-feature">
+            <TextBox title={"Track projects in real time"}
+            description="Every project gets one reliable source of truth with milestones, long-form notes, infobox context, and quick summaries."
+            links={[{name: "Start Writing", path: "/create"}]}
+            style={{width: "100%"}}
+            />
         </div>
-        </>
+        <div className="display-section display-cta">
+            <TextBox title={"Ready to explore?"}
+            description="Jump into the archive and discover what the team has learned, built, and improved."/>
+            <input placeholder="Search the archive"></input>
+        </div>
+        </div>
     )
 }
 

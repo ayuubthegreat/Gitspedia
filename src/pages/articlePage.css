@@ -1,47 +1,106 @@
-body {
-    line-height: 1.6;
+.article-page-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 8px 6px;
 }
 
 .article-page-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
+
+.article-action-link {
+    border-radius: 999px;
+    padding: 10px 16px;
+    color: #ffffff;
+    background: #215d49;
+    font-weight: 700;
+}
+
+.article-action-link:hover {
+    background: #173f32;
+}
+
+.article-action-delete {
+    background: #fbe9e7;
+    color: #8f2a22;
+    border: 1px solid #f0c7c2;
+}
+
+.article-action-delete:hover {
+    background: #f6d7d3;
+    box-shadow: none;
+}
+
 .article-main-container {
     display: flex;
-    flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 5px;
+    gap: 24px;
     width: 100%;
 }
+
 .separator {
     height: 1px;
-    background-color: #212121;
-    margin: 10px 0;
+    background-color: #cfdbd2;
+    margin: 14px 0 18px;
 }
+
+.article-main-content {
+    flex: 1;
+    background: linear-gradient(155deg, #ffffff 0%, #f8fcf8 100%);
+    border: 1px solid #d4e1d6;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.article-main-content h1 {
+    margin-bottom: 14px;
+}
+
+.article-main-content h2 {
+    margin-top: 18px;
+    margin-bottom: 8px;
+}
+
 .infobox {
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 1px solid #d4e1d6;
+    padding: 16px;
     width: 100%;
-    max-width: 600px;
+    max-width: 350px;
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    border-radius: 16px;
+    background: linear-gradient(160deg, #f4f8f4 0%, #edf4ef 100%);
 }
+
 .infobox img {
     max-width: 100%;
     height: auto;
+    border-radius: 12px;
 }
+
 .infobox-field {
-    margin-bottom: 5px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-top: 1px solid #d6e1d8;
+    padding-top: 8px;
 }
+
 @media (max-width: 768px) {
     .article-main-container {
         flex-direction: column;
     }
+
+    .article-main-content {
+        padding: 18px;
+    }
+
     .infobox {
         max-width: 100%;
     }
-    
 }

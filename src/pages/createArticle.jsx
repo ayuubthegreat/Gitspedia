@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { CreateArticle, UpdateArticle } from "../store/slice";
 import "./createArticle.css"
 import { useState } from "react";
-import { set } from "zod";
 import { useNavigate } from "react-router-dom";
 
 export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
@@ -14,7 +13,6 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
         register,
         getValues,
         setValue,
-        reset,
         formState: {errors}
     } = useForm({
         defaultValues: isEditing && articleData ? articleData : articlePrototype
@@ -22,7 +20,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
     const [paragraphIndex, setParagraphIndex] = useState(-1);
     const [paragraphData, setParagraphData] = useState(getValues("paragraphs") || []);
     const [infoboxIndex, setInfoboxIndex] = useState(-1);
-    const [infoboxData, setInfoboxData] = useState(getValues("infobox") || []);
+    const [infoboxData, setInfoboxData] = useState(getValues("infobox.fields") || []);
     const [showParagraphWindow, setShowParagraphWindow] = useState(false);
     const [showInfoboxFieldWindow, setShowInfoboxFieldWindow] = useState(false);
     const dispatch = useDispatch();
@@ -92,7 +90,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
             const values = getValues();
             console.log(values)
             if (isEdit) {
-                values.infobox[infoboxIndex] = newInfoboxField;
+                values.infobox.fields[infoboxIndex] = newInfoboxField;
             } else {
                 values.infobox.fields.push(newInfoboxField);
             }
@@ -118,9 +116,10 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
         <>
         {showParagraphWindow && <CreateParagraphWindow />}
         {showInfoboxFieldWindow && <CreateInfoboxFieldWindow />}
-        <h1>Articles</h1>
+        <h1 className="editor-title">{isEditing ? "Edit Article" : "Create Article"}</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="article-creation-form">
             <div className="input-group">
+            <h3>Core Details</h3>
             <input {...register("title", {required: "Title is required"})} placeholder="Title"/>
             {errors.title && <p>{errors.title.message}</p>}
             <input {...register("searchBlurb", {required: "Search Blurb is required"})} placeholder="Search Blurb"/>
@@ -171,7 +170,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
                         <button type="button" onClick={() => {
                             const updatedInfobox = infoboxData.filter((val, idx) => idx !== index);
                             setInfoboxData(updatedInfobox);
-                            setValue("infobox", updatedInfobox);
+                            setValue("infobox.fields", updatedInfobox);
                         }}>Delete</button>
                         <h4>{`Infobox Field ${index + 1}`}: {field.key}</h4>
                         <p>{field.value}</p>
@@ -182,7 +181,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
 
             </div>
         
-        <button type="submit">Create Article</button>
+        <button type="submit">{isEditing ? "Save Changes" : "Create Article"}</button>
         </form>
         </>
     )
