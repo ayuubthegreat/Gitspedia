@@ -1,3 +1,3 @@
 export const BASE_DATA = {
-    url: "http://localhost:3005"
+    url: "https://haraka-api-ysy9.vercel.app"
 }
