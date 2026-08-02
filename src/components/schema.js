@@ -22,8 +22,6 @@ export const articlePrototype = {
     searchBlurb: "",
     mainParagraph: "",
     paragraphs: [],
-    infobox: {
-        imageLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Wikipedia-logo.png/600px-Wikipedia-logo.png",
-        fields: []
-    }
+    titleImageLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Wikipedia-logo.png/600px-Wikipedia-logo.png",
+    infoboxFields: [],
 }

@@ -12,7 +12,7 @@ export const LoadArticles = createAsyncThunk(
     "articles/load",
     async(_, {rejectWithValue}) => {
         try {
-            const response = await APICall({endpoint: "articles/load", method: "GET"})
+            const response = await APICall({endpoint: "gitspedia/articles/", method: "GET"})
             return response
         } catch (error) {
             return rejectWithValue(error.message)
@@ -23,7 +23,7 @@ export const LoadArticleById = createAsyncThunk(
     "articles/loadById",
     async({id}, {rejectWithValue}) => {
         try {
-            const response = await APICall({endpoint: `articles/${id}`, method: "GET"})
+            const response = await APICall({endpoint: `gitspedia/articles/${id}`, method: "GET"})
             return response
         } catch (error) {
             return rejectWithValue(error.message)
@@ -34,7 +34,7 @@ export const CreateArticle = createAsyncThunk(
     "articles/create",
     async({articleData}, {rejectWithValue}) => {
         try {
-            const response = await APICall({endpoint: "articles/create", method: "POST", data: articleData})
+            const response = await APICall({endpoint: "gitspedia/articles/", method: "POST", data: articleData})
             return response
         } catch (error) {
             return rejectWithValue(error.message)
@@ -45,7 +45,7 @@ export const UpdateArticle = createAsyncThunk(
     "articles/update",
     async({articleData}, {rejectWithValue}) => {
         try {
-            const response = await APICall({endpoint: `articles/update`, method: "POST", data: articleData})
+            const response = await APICall({endpoint: `gitspedia/articles/${articleData.id}`, method: "PUT", data: articleData})
             return response
         } catch (error) {
             return rejectWithValue(error.message)
@@ -56,7 +56,7 @@ export const DeleteArticle = createAsyncThunk(
     "articles/delete",
     async({id}, {rejectWithValue}) => {
         try {
-            const response = await APICall({endpoint: `articles/delete`, method: "POST", data: {id}})
+            const response = await APICall({endpoint: `gitspedia/articles/${id}`, method: "DELETE"})
             return response
         } catch (error) {
             return rejectWithValue(error.message)

@@ -20,7 +20,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
     const [paragraphIndex, setParagraphIndex] = useState(-1);
     const [paragraphData, setParagraphData] = useState(getValues("paragraphs") || []);
     const [infoboxIndex, setInfoboxIndex] = useState(-1);
-    const [infoboxData, setInfoboxData] = useState(getValues("infobox.fields") || []);
+    const [infoboxData, setInfoboxData] = useState(getValues("infoboxFields") || []);
     const [showParagraphWindow, setShowParagraphWindow] = useState(false);
     const [showInfoboxFieldWindow, setShowInfoboxFieldWindow] = useState(false);
     const dispatch = useDispatch();
@@ -90,12 +90,12 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
             const values = getValues();
             console.log(values)
             if (isEdit) {
-                values.infobox.fields[infoboxIndex] = newInfoboxField;
+                values.infoboxFields[infoboxIndex] = newInfoboxField;
             } else {
-                values.infobox.fields.push(newInfoboxField);
+                values.infoboxFields.push(newInfoboxField);
             }
-            setValue("infobox.fields", values.infobox.fields);
-            setInfoboxData(values.infobox.fields);
+            setValue("infoboxFields", values.infoboxFields);
+            setInfoboxData(values.infoboxFields);
             setInfoboxIndex(-1);
             setShowInfoboxFieldWindow(false);
         }
@@ -156,7 +156,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
             </div>
             <div className="input-group">
             <h3>Infobox</h3>
-            <input {...register("infobox.imageLink")} placeholder="Infobox Image Link"/>
+            <input {...register("titleImageLink")} placeholder="Infobox Image Link"/>
             <div className="infobox-creation-box">
                 
                <button type="button" onClick={() => {setShowInfoboxFieldWindow(true)}}>Create Infobox Field</button>
@@ -170,7 +170,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
                         <button type="button" onClick={() => {
                             const updatedInfobox = infoboxData.filter((val, idx) => idx !== index);
                             setInfoboxData(updatedInfobox);
-                            setValue("infobox.fields", updatedInfobox);
+                            setValue("infoboxFields", updatedInfobox);
                         }}>Delete</button>
                         <h4>{`Infobox Field ${index + 1}`}: {field.key}</h4>
                         <p>{field.value}</p>
