@@ -124,7 +124,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
             {errors.title && <p>{errors.title.message}</p>}
             <input {...register("searchBlurb", {required: "Search Blurb is required"})} placeholder="Search Blurb"/>
             {errors.searchBlurb && <p>{errors.searchBlurb.message}</p>}
-            <textarea {...register("mainParagraph", {required: "Main Paragraph is required"})} placeholder="Main Paragraph"/>
+            <textarea className="main-paragraph-textarea" {...register("mainParagraph", {required: "Main Paragraph is required"})} placeholder="Main Paragraph"/>
             {errors.mainParagraph && <p>{errors.mainParagraph.message}</p>}
             </div>
             <div className="input-group">

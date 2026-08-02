@@ -28,11 +28,21 @@ const ArticlePage = ({id}) => {
             <div className="separator"></div>
             <div className="article-main-container">
                 <div className="article-main-content">
-                
                      <h1>{article.title}</h1>
 
                <div>
                     <p dangerouslySetInnerHTML={{ __html: toHTML(article.mainParagraph) }}></p>
+                     <div className="infobox infobox-mobile">
+                    <h1>{article.title}</h1>
+                    {article.titleImageLink && <img src={article.titleImageLink} alt="Infobox Image" />}
+                    {article.infoboxFields && article.infoboxFields.map((field, index) => (
+                        <div key={index} className="infobox-field">
+                            <strong>{field.key}: </strong>
+                            <span>{field.value}</span>
+                        </div>
+                    ))}
+                </div>
+
             {article.paragraphs?.map((paragraph, index) => (
                 <div key={index}>
                     <h2>{paragraph.title}</h2>
@@ -42,10 +52,10 @@ const ArticlePage = ({id}) => {
                 </div>
                 
                </div>
-                <div className="infobox">
+                <div className="infobox infobox-desktop">
                     <h1>{article.title}</h1>
-                    {article.infobox?.imageLink && <img src={article.infobox.imageLink} alt="Infobox Image" />}
-                    {article.infobox?.fields && article.infobox.fields.map((field, index) => (
+                    {article.titleImageLink && <img src={article.titleImageLink} alt="Infobox Image" />}
+                    {article.infoboxFields && article.infoboxFields.map((field, index) => (
                         <div key={index} className="infobox-field">
                             <strong>{field.key}: </strong>
                             <span>{field.value}</span>
