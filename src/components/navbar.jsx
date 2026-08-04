@@ -35,7 +35,7 @@ const  Navbar = () => {
                 <Link className="nav-link" to={"/about"}>About</Link>
                 <Link className="nav-link" to={"/articles"}>Articles</Link>
                 {user && user.role === "SUPERADMIN" && <Link className="nav-link nav-link-accent" to={"/create"}>Create Article</Link>}
-                {user ? <span className="nav-user">Welcome, {user.username}</span> : <Link className="nav-link" to={"/login"}>Login</Link>}
+                {user ? <span className="nav-user">Welcome, {user.username}!</span> : <Link className="nav-link" to={"/login"}>Login</Link>}
                 {!user && <Link className="nav-link" to={"/register"}>Register</Link>}
                 {user && <button className="nav-link" onClick={LogoutFunction}>Logout</button>}
             </div>
@@ -45,7 +45,7 @@ const  Navbar = () => {
                     <Link className="nav-link" to={"/about"}>About</Link>
                     <Link className="nav-link" to={"/articles"}>Articles</Link>
                     {user && user.role === "SUPERADMIN" && <Link className="nav-link nav-link-accent" to={"/create"}>Create Article</Link>}
-                    {user ? <span className="nav-user">Welcome, {user.username}</span> : <Link className="nav-link" to={"/login"}>Login</Link>}
+                    {user ? <span className="nav-user">Welcome, {user.username}!</span> : <Link className="nav-link" to={"/login"}>Login</Link>}
                 {!user && <Link className="nav-link" to={"/register"}>Register</Link>}
                 {user && <button className="nav-link" onClick={LogoutFunction}>Logout</button>}
                 </div>}

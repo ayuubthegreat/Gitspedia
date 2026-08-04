@@ -30,6 +30,7 @@
 .nav-links {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 10px;
     flex-wrap: wrap;
 }
@@ -54,13 +55,16 @@
 .nav-link {
     border-radius: 999px;
     padding: 10px 14px;
-    color: #284c3b;
+    color: black;
     font-weight: 700;
     transition: background-color 0.16s ease, color 0.16s ease;
 }
+.nav-link button {
+    color: black;
+}
 
 .nav-link:hover {
-    color: #ffffff;
+    color: gray;
     background: #2f6953;
 }
 
