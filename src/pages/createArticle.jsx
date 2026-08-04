@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { articlePrototype } from "../components/schema"
 import { useDispatch } from "react-redux";
-import { CreateArticle, UpdateArticle } from "../store/slice";
+import { CreateArticle, UpdateArticle } from "../store/slices/articlesSlice";
 import "./createArticle.css"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -62,6 +62,13 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
         if (infoboxFieldKeyInput && infoboxFieldValueInput) {
             infoboxFieldKeyInput.value = field.key;
             infoboxFieldValueInput.value = field.value;
+        }
+    }
+    const SetDefaultValuesTag = (index) => {
+        const tag = tagData[index];
+        const tagInput = document.getElementById("tag-input");
+        if (tagInput) {
+            tagInput.value = tag;
         }
     }
     const CreateParagraphWindow = () => {

@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "../pages/articlePage.css"
 import { useDispatch, useSelector } from "react-redux";
 import DOMPurify from "dompurify";
-import { DeleteArticle } from "../store/slice";
+import { DeleteArticle } from "../store/slices/articlesSlice";
+import { use } from "react";
 
 
 const toHTML = (text) => DOMPurify.sanitize((text ?? "").replace(/\n/g, "<br>"));
@@ -11,19 +12,25 @@ const ArticlePage = ({id}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {articles} = useSelector((state) => state.articles)
+    const {user} = useSelector((state) => state.user)
     const article = articles.find((article) => article.id === id);
     if (!article) {
         return <p>Article not found.</p>
     }
     return (
         <div className="article-page-container">
-            <div className="article-page-actions">
+{user && user.role === "SUPERADMIN" && (
+    <>
+     <div className="article-page-actions">
             <Link className="article-action-link" to={`/articles/editArticle/${article.id}`}>Edit Article</Link>
             <button className="article-action-delete" type="button" onClick={() => {
                 dispatch(DeleteArticle({id})).unwrap()
                 navigate("/");
             }}>Delete Article</button>
             </div>
+    </>
+)}
+           
             <div className="separator"></div>
             <div className="article-main-container">
                 <div className="article-main-content">

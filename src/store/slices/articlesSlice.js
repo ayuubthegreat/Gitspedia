@@ -1,12 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { APICall, Article_SuccessCase, FailedCase, LoadingCase } from "./funcs"
+import { APICall, Article_SuccessCase, FailedCase, LoadingCase, User_SuccessCase } from "../funcs"
 
 
 
 export const initialState = {
-    articles: []
+    articles: [],
+    user: null,
+    success: false,
+    successMessage: "",
+    error: null,
 }
 
+// Article slices
 
 export const LoadArticles = createAsyncThunk(
     "articles/load",
@@ -63,6 +68,7 @@ export const DeleteArticle = createAsyncThunk(
         }
     }
 )
+
 
 export const ArticlesSlice = createSlice({
     name: "articles",
