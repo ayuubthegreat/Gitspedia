@@ -1,0 +1,41 @@
+.about-section {
+    margin-bottom: 10px;
+    border-radius: 0px;
+}
+.intro-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50vh;
+    background-color: wheat;
+    background-image: url('C:/Users/yusuf/Websites/Gitspedia/src/assets/frame000000000000.png');
+    background-size: cover;
+    background-position: center;
+}
+.textBox {
+    background-color: white;
+    width: 60%;
+    margin-left: 2vw;
+    padding: 20px;
+    border-radius: 8px;
+}
+.features-parent .textBox {
+    background-color: #f0f0f0;
+    width: 70%;
+    margin-left: 2vw;
+    padding: 25px;
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+}
+.features-parent {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    overflow-x: scroll;
+}
