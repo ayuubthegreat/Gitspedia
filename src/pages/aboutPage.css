@@ -1,6 +1,8 @@
 .about-section {
     margin-bottom: 10px;
     border-radius: 0px;
+    display: flex;
+    flex-direction: column;
 }
 .intro-panel {
     display: flex;
@@ -38,4 +40,39 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     overflow-x: scroll;
+    margin-top: 20px;
+}
+.features-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+.special-card {
+    background-color: #ffefef;
+    border: 1px solid #ffcccc;
+}
+
+@media (max-width: 768px) {
+    .intro-panel {
+        height: 40vh;
+    }
+    .about-section {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        
+        height: auto;
+    }
+    .textBox {
+        width: 100%;
+        margin: 30px;
+        padding: 15px;
+    }
+
+    .features-list {
+        display: flex;
+        flex-direction: column;
+    }
 }

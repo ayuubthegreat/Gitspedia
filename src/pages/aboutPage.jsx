@@ -10,7 +10,7 @@ export default function AboutPage() {
             <div className='textBox'>
  <h1>About Gitspedia</h1>
             <p>Gitspedia is an answer to a simple question: <strong>What if creative studios had their own Wikipedia site?</strong><br></br>Speaking of which, there's also a Gitspedia article about this site! Check it out.....</p>
-            <Link to="/articles">
+            <Link to="/articles/cmsbrqb8200006xvlrn9mqmmc">
                 Read the Gitspedia article about this site
             </Link>
             <p><br></br>Or you can simply stick around and see what Gitspedia has to offer. That's cool too.</p>
@@ -32,16 +32,43 @@ export default function AboutPage() {
             <div className='textBox'>
                 <h2>But enough rambling. Let's talk features!</h2>
                 <h4>Features of Gitspedia</h4>
-                <div className="features-list">
+                
+  
+            </div>
+            <div className="features-list">
                     <div className="features-card">
                         <h3>Collaborative Editing</h3>
-                        <p>What, you thought you couldn't contribute to our projects? No way! You can register to be an admin and start editing and proofreading artic</p>
+                        <p>What, you thought you couldn't contribute to our projects? No way! You can register to be an admin and start editing and proofreading articles whenever you want--provided you sign up and request to be an admin.</p>
                     </div>
                     <div className="features-card">
-                        <h3>Version Control</h3>
-                        <p>Gitspedia keeps track of all changes made to articles, allowing contributors to view the history and revert to previous versions if needed.</p>
+                        <h3>Easy To Use</h3>
+                        <p>Gitspedia has an easy to use and easy to read interface, making reading simple---if you can navigate a website, you can navigate Gitspedia. Easy peasy!</p>
                     </div>
+                    <div className="features-card">
+                        <h3>Responsive Design</h3>
+                        <p>Gitspedia is designed to be responsive across all devices--computer, tablet, mobile--even TV if that's how you read articles! No matter what device you're using, we've got you covered.</p>
                     </div>
+                    <div className="features-card special-card">
+                        <h3><i>Zero</i> Corporate Influence</h3>
+                        <p>Crescent Moon Studio is a fully independent studio. No corporations influence our decisions, none at all! No investors are involved in our projects!</p>
+                        <h6>To be honest, this is the most important aspect of our studio's philosophy--aside from being original, of course.</h6>
+                    </div>
+                    
+                    </div>
+            <div className="textBox">
+                <h2>But most importantly....</h2>
+            </div>
+            <div className="features-list">
+                <div className="features-card">
+                    <h3>Filled To The Brim With Behind-The-Scenes Development Content</h3>
+                    <p>If you like to read, then trust us, this website is for you. And if you like our studio's works, then this website is <i>doubly</i> for you! Gitspedia is <strong>filled with details about our projects, and the behind-the-scenes development processes that go into each and every single one of them.</strong></p>
+                </div>
+            </div>
+        </section>
+        <section className="about-section conclusion">
+            <div className="textBox">
+                <h2>So, our website's pretty cool, huh?</h2>
+                <p>We hope it's as enjoyable for you to use as it was for us to create! You're going to have a blast reading all of the juicy details that go into our projects, every last one of them! Because at the end of the day, <strong>we make projects to make people happy. And that makes us happy.</strong></p>
             </div>
         </section>
         </>
