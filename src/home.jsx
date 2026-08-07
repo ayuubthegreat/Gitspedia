@@ -16,7 +16,7 @@ const Home = () => {
     return (
         <div className="home-page">
         <div className="display-section display-hero" >
-            <TextBox title="Welcome to Gitspedia" 
+            <TextBox title="Welcome to Gitspedia--we're glad you're here" 
             description="A studio encyclopedia built for clear writing, faster discovery, and collaborative project memory." 
             links={[{name: "Learn More", path: "/about"}, {name: "Browse Articles", path: "/articles"}]} style={{ maxWidth: "720px" }} />
         </div>
