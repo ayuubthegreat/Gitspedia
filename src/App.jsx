@@ -11,6 +11,8 @@ import { GetUserInfo } from './store/slices/usersSlice.js'
 import { ClearSuccessMessage } from './store/slices/usersSlice.js'
 import { CreateArticlePage } from './pages/createArticle.jsx'
 import ArticlePage from './pages/articlePage.jsx'
+import AuthenticationFirewall from '../middleware/AuthenticationFirewall.jsx'
+import AboutPage from './pages/aboutPage.jsx'
 
 function App() {
     const {articles} = useSelector((state) => state.articles)
@@ -32,15 +34,15 @@ function App() {
                 {success && <div className="success-message">Action was successful!</div>}
                 <main className="page-shell">
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<section className="about-panel"><h1>About Gitspedia</h1><p>Gitspedia is a living studio encyclopedia where teams can document projects, ideas, and milestones in one place.</p></section>} />
+                       <Route path="/" element={<AuthenticationFirewall needsAuthentication={false}><Home /></AuthenticationFirewall>} />
+                        <Route path="/about" element={<AboutPage />} />
                         <Route path="/articles" element={<ArticlesPage/>}/>
-                        <Route path="/create" element={<CreateArticlePage/>}/>
+                        <Route path="/create" element={<AuthenticationFirewall needsAuthentication={true}><CreateArticlePage/></AuthenticationFirewall>}/>
                         {articles && articles.length > 0 && articles.map((article) => {
                             return <Route key={article.id} path={`/articles/${article.id}`} element={<ArticlePage id={article.id} />} />
                         })}
                         {articles && articles.length > 0 && articles.map((article) => {
-                            return <Route key={article.id} path={`/articles/editArticle/${article.id}`} element={<CreateArticlePage isEditing={true} articleData={article}/>} />
+                            return <Route key={article.id} path={`/articles/editArticle/${article.id}`} element={<AuthenticationFirewall needsAuthentication={true}><CreateArticlePage isEditing={true} articleData={article}/></AuthenticationFirewall>} />
                         })}
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/register" element={<RegisterPage />} />
