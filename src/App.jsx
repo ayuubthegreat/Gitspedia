@@ -34,7 +34,7 @@ function App() {
                 {success && <div className="success-message">Action was successful!</div>}
                 <main className="page-shell">
                     <Routes>
-                       <Route path="/" element={<AuthenticationFirewall needsAuthentication={false}><Home /></AuthenticationFirewall>} />
+                       <Route path="/" element={<Home />} />
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/articles" element={<ArticlesPage/>}/>
                         <Route path="/create" element={<AuthenticationFirewall needsAuthentication={true}><CreateArticlePage/></AuthenticationFirewall>}/>
