@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { BASE_DATA } from "./BASE_DATA"
 import "../src/home.css"
 
 const TextBox = ({title, description, links, style}) => {
@@ -16,20 +17,17 @@ const Home = () => {
     return (
         <div className="home-page">
         <div className="display-section display-hero" >
-            <TextBox title="Welcome to Gitspedia--we're glad you're here" 
-            description="A studio encyclopedia built for clear writing, faster discovery, and collaborative project memory." 
+            <TextBox title={`Welcome to Gitspedia `}
+            description={`the official creative encyclopedia for ${BASE_DATA.studio_name}`}
             links={[{name: "Learn More", path: "/about"}, {name: "Browse Articles", path: "/articles"}]} style={{ maxWidth: "720px" }} />
         </div>
         <div className="display-section display-feature">
-            <TextBox title={"Official, but still objective"}
-            description="Articles come from teams closest to the work while maintaining neutral language for better onboarding and decision making."
+            <TextBox title={"Official, but not bare"}
+            description="This encyclopedia may be official, but it is content-packed, breaking creative website conventions."
             links={[{name: "Read Policy", path: "/about"}]}
             />
-        </div>
-        <div className="display-section display-feature">
-            <TextBox title={"Track projects in real time"}
-            description="Every project gets one reliable source of truth with milestones, long-form notes, infobox context, and quick summaries."
-            links={[{name: "Start Writing", path: "/create"}]}
+              <TextBox title={"Track projects in real time"}
+            description="Every project gets one reliable source of truth. As we update and improve our projects, we will occasionally update our Gitspedia articles, always giving you the most recent information--for free."
             style={{width: "100%"}}
             />
         </div>
