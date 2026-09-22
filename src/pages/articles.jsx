@@ -10,6 +10,8 @@ const ArticlesPage = () => {
     const navigate = useNavigate();
     const {articles} = useSelector((state) => state.articles)
     const [filteredArticles, setFilteredArticles] = useState(articles);
+    const [isFilteringArticlesByTag, setIsFilteringArticlesByTag] = useState(false);
+    const [filteredTag, setFilteredTag] = useState(null);
 
     const getAllTags = () => {
         const tagsSet = new Set();
@@ -23,6 +25,8 @@ const ArticlesPage = () => {
     const filterArticlesByTag = (tag) => {
         const filtered = articles.filter(article => article.tags && article.tags.includes(tag));
         setFilteredArticles(filtered);
+        setIsFilteringArticlesByTag(true);
+        setFilteredTag(tag);
     }
     return (
         <section className="articles-page">
@@ -34,10 +38,11 @@ const ArticlesPage = () => {
             <div className="articles-tags">
                 <h2>Tags</h2>
                 <div className="articles-tags-list">
-                    {getAllTags().map((tag, index) => (
+                    {filteredTag ? <span className="articles-filtered-tag" onClick={() => filterArticlesByTag(filteredTag)}>{filteredTag}</span> : getAllTags().map((tag, index) => (
                         <span key={index} className="articles-tag" onClick={() => filterArticlesByTag(tag)}>{tag}</span>
                     ))}
-                    <span className="articles-tag articles-tag-clear" onClick={() => setFilteredArticles(articles)}>Clear Filter</span>
+                    
+                    {isFilteringArticlesByTag && <span className="articles-tag articles-tag-clear" onClick={() => {setFilteredArticles(articles); setIsFilteringArticlesByTag(false); setFilteredTag(null);}}>Clear Filter</span>}
                 </div>
                     </div>
         )}

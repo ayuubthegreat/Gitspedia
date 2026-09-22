@@ -52,6 +52,10 @@
     gap: 8px;
     margin-bottom: 16px;
 }
+.articles-tag:hover {
+    background: #d4e8d4;
+    cursor: pointer;
+}
 .articles-tag-clear {
     background: #945555;
     color: #fff;
