@@ -34,7 +34,7 @@
     cursor: pointer;
 }
 
-.card-tags .card-tag, .articles-tags-list .articles-tag {
+.card-tags .card-tag, .articles-tags-list .articles-tag, .articles-filtered-tag, .articles-tag-clear {
     display: inline-flex;
     margin-bottom: 10px;
     border-radius: 999px;
@@ -46,6 +46,15 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
+.articles-filtered-tag {
+    color: black;
+    background: white;
+}
+.articles-tag-clear {
+    background: aliceblue;
+    color: red;
+}
+
 .articles-tags-list {
     display: flex;
     flex-wrap: wrap;

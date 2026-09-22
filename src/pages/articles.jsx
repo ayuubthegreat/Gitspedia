@@ -42,7 +42,7 @@ const ArticlesPage = () => {
                         <span key={index} className="articles-tag" onClick={() => filterArticlesByTag(tag)}>{tag}</span>
                     ))}
                     
-                    {isFilteringArticlesByTag && <span className="articles-tag articles-tag-clear" onClick={() => {setFilteredArticles(articles); setIsFilteringArticlesByTag(false); setFilteredTag(null);}}>Clear Filter</span>}
+                    {isFilteringArticlesByTag && <span className="articles-tag-clear" onClick={() => {setFilteredArticles(articles); setIsFilteringArticlesByTag(false); setFilteredTag(null);}}>Clear Filter</span>}
                 </div>
                     </div>
         )}
