@@ -1,4 +1,4 @@
-import { CreateComment, LoadComments, DeleteComment, LikeComment, UnlikeComment } from "../store/slices/commentsSlice";
+import { CreateComment, LoadComments, DeleteComment, Like_UnlikeComment, ClearReactionOfComment } from "../store/slices/commentsSlice";
 import { Link, useNavigate } from "react-router-dom";
 import "../pages/articlePage.css"
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,10 @@ import {UpdateArticle} from "../store/slices/articlesSlice";
 
 
 const CommentsPage = ({articleId}) => {
-    const hasLikedComment = (comment) => {
+   
+    const {comments} = useSelector((state) => state.comments)
+    const {user} = useSelector((state) => state.user)
+     const hasLikedComment = (comment) => {
         if (!user) return false;
         return comment.likes?.some((like) => like.userID === user.id && like.type === "Like");
     }
@@ -29,9 +32,11 @@ const CommentsPage = ({articleId}) => {
         // Add your delete comment logic here
         dispatch(DeleteComment({commentId})).unwrap();
     }
-    const {comments} = useSelector((state) => state.comments)
-    const {user} = useSelector((state) => state.user)
     const articleComments = comments;
+    useEffect(() => {
+        dispatch(LoadComments({articleId})).unwrap();
+        console.log(`Article viewed and comments loaded: ${articleComments}`);
+    }, [dispatch, articleId]);
     return (
         <div className="comments-page-container">
             <div className="comments-header">
@@ -43,10 +48,12 @@ const CommentsPage = ({articleId}) => {
                  <p>No comments yet. {user && "Be the first to comment!"}</p>
                     <p>{!user && <Link to="/login">Log in to be the first to comment!</Link>}</p>
                 </>
-            ) : articleComments.map((comment) => (
+            ) : articleComments.map((comment) => {
+                console.log(`Rendering comment: ${comment.likes}`);
+                return (
                 <div key={comment.id} className="commentCard" style={{position: "relative", backgroundColor: `${user && user.role === "SUPERADMIN" ? "#f6d7d3" : "#f8fcf8"}`}}>
                     <div className="comment-card-controls">
-                        {user && user.username === comment.username && (
+                        {user && (user.username === comment.username) && (
                             <button type="button" onClick={() => {
                                 onSubmitDeleteComment({commentId: comment.id});
                             }}>Delete</button>
@@ -58,16 +65,23 @@ const CommentsPage = ({articleId}) => {
                         {user && (
                             <>
                                 <button type="button" onClick={() => {
-                                    dispatch(LikeComment({commentId: comment.id, type: "Like", userID: user.id, articleID: articleId})).unwrap();
+                                    if (hasLikedComment(comment))
+                                        dispatch(ClearReactionOfComment({commentId: comment.id, type: "Like", userID: user.id, articleID: articleId})).unwrap();
+                                    else
+                                        dispatch(Like_UnlikeComment({commentId: comment.id, type: "Like", userID: user.id, articleID: articleId})).unwrap();
+                                    
                                 }} style={{color: hasLikedComment(comment) ? "blue" : "black"}}>Like</button>
                                 <button type="button" onClick={() => {
-                                    dispatch(UnlikeComment({commentId: comment.id, type: "Dislike", userID: user.id, articleID: articleId})).unwrap();
+                                    if (hasDislikedComment(comment))
+                                        dispatch(ClearReactionOfComment({commentId: comment.id, type: "Dislike", userID: user.id, articleID: articleId})).unwrap();
+                                    else
+                                        dispatch(Like_UnlikeComment({commentId: comment.id, type: "Dislike", userID: user.id, articleID: articleId})).unwrap();
                                 }} style={{color: hasDislikedComment(comment) ? "red" : "black"}}>Dislike</button>
                             </>
                         )}
                     </div>
                 </div>
-            ))}
+            )})}
             </div>
             {user && (
             <div className="add-comment-section">
@@ -92,6 +106,7 @@ const ArticlePage = ({id}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {articles} = useSelector((state) => state.articles)
+    const {comments} = useSelector((state) => state.comments)
     const {user} = useSelector((state) => state.user)
     const [hasViewedArticle, setHasViewedArticle] = useState(false);
     const article = articles.find((article) => article.id === id);
@@ -100,7 +115,9 @@ const ArticlePage = ({id}) => {
         setHasViewedArticle(true);
        dispatch(UpdateArticle({articleData: {...article, views: (article.views ?? 0) + 1}})).unwrap();
        dispatch(LoadComments({articleId: id})).unwrap();
+      
     }
+     console.log(`Article viewed and comments loaded: ${comments}`);
 }, [hasViewedArticle]);
     if (!article) {
         return <p>Article not found.</p>
