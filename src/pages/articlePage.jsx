@@ -25,7 +25,14 @@ const CommentsPage = ({articleId}) => {
     return (
         <div className="comments-page-container">
             <h2>Comments</h2>
-            {articleComments.map((comment) => (
+            {articleComments.length === 0 ? (
+                <>
+                 <p>No comments yet. {user && "Be the first to comment!"}</p>
+                    <p>{!user && ""}</p>
+                </>
+               
+                
+            ) : articleComments.map((comment) => (
                 <div key={comment.id} className="commentCard" style={{position: "relative", backgroundColor: `${user && user.role === "SUPERADMIN" ? "#f6d7d3" : "#f8fcf8"}`}}>
                     <div className="comment-card-controls">
                         {user && user.username === comment.username && (
@@ -38,6 +45,7 @@ const CommentsPage = ({articleId}) => {
                     <p>{comment.content}</p>
                 </div>
             ))}
+            {user && (
             <div className="add-comment-section">
                 <input type="text" placeholder="Add a comment..." id="comment-input" />
                 <button type="button" onClick={() => {
@@ -49,6 +57,7 @@ const CommentsPage = ({articleId}) => {
                     commentInput.value = "";
                 }}>Submit</button>
             </div>
+            )}
         </div>
     )
 }
