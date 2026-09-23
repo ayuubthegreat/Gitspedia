@@ -1,10 +1,10 @@
+import { CreateComment, LoadComments, DeleteComment } from "../store/slices/commentsSlice";
 import { Link, useNavigate } from "react-router-dom";
 import "../pages/articlePage.css"
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import { DeleteArticle } from "../store/slices/articlesSlice";
-import { CreateComment } from "../store/slices/commentsSlice";
 import { use } from "react";
 import { useEffect } from "react";
 import {UpdateArticle} from "../store/slices/articlesSlice";
@@ -12,16 +12,29 @@ import {UpdateArticle} from "../store/slices/articlesSlice";
 
 const CommentsPage = ({articleId}) => {
     const dispatch = useDispatch();
-    const onSubmitComment = (articleID, commentData) => {
+    const onSubmitComment = ({articleID, commentData}) => {
         dispatch(CreateComment({articleID, commentData})).unwrap();
+    }
+    const onSubmitDeleteComment = ({commentId}) => {
+        // Add your delete comment logic here
+        dispatch(DeleteComment({commentId})).unwrap();
     }
     const {comments} = useSelector((state) => state.comments)
     const {user} = useSelector((state) => state.user)
-    const articleComments = comments.filter((comment) => comment.articleID === articleId)
+    const articleComments = comments;
     return (
         <div className="comments-page-container">
+            <h2>Comments</h2>
             {articleComments.map((comment) => (
-                <div key={comment.id} className="comment">
+                <div key={comment.id} className="commentCard" style={{position: "relative", backgroundColor: `${user && user.role === "SUPERADMIN" ? "#f6d7d3" : "#f8fcf8"}`}}>
+                    <div className="comment-card-controls">
+                        {user && user.username === comment.username && (
+                            <button type="button" onClick={() => {
+                                onSubmitDeleteComment({commentId: comment.id});
+                            }}>Delete</button>
+                        )}
+                        </div>
+                    <h5>{comment.username} ({comment.email})</h5>
                     <p>{comment.content}</p>
                 </div>
             ))}
@@ -32,7 +45,7 @@ const CommentsPage = ({articleId}) => {
                     const commentInput = document.getElementById("comment-input");
                     const commentData = { content: commentInput.value, username: user.username, email: user.email };
                     console.log(commentData);
-                    onSubmitComment(articleId, commentData);
+                    onSubmitComment({articleID: articleId, commentData});
                     commentInput.value = "";
                 }}>Submit</button>
             </div>
@@ -53,6 +66,7 @@ const ArticlePage = ({id}) => {
     if (!hasViewedArticle) {
         setHasViewedArticle(true);
        dispatch(UpdateArticle({articleData: {...article, views: (article.views ?? 0) + 1}})).unwrap();
+       dispatch(LoadComments({articleId: id})).unwrap();
     }
 }, [hasViewedArticle]);
     if (!article) {

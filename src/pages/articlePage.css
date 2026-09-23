@@ -114,6 +114,13 @@
     overflow-x: scroll;
     padding-bottom: 8px;
 }
+.commentCard {
+    border: 1px solid #d4e1d6;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #f8fcf8;
+}
 
 @media (max-width: 768px) {
     .article-main-container {

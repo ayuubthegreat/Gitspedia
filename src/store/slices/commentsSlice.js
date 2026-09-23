@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Comments_SuccessCase, FailedCase, LoadingCase } from "../funcs"
+import { APICall } from "../funcs"
 
 
 
@@ -14,7 +15,7 @@ export const initialState = {
 
 export const LoadComments = createAsyncThunk(
     "articles/comments/load",
-     async(articleId, {rejectWithValue}) => {
+     async({articleId}, {rejectWithValue}) => {
             try {
                 const response = await APICall({endpoint: `gitspedia/articles/comments/${articleId}`, method: "GET"})
                 return response
@@ -45,6 +46,17 @@ export const UpdateComment = createAsyncThunk(
             }
         }
 )
+export const DeleteComment = createAsyncThunk(
+    "articles/comments/delete",
+     async({commentId}, {rejectWithValue}) => {
+            try {
+                const response = await APICall({endpoint: `gitspedia/articles/comments/${commentId}`, method: "DELETE"})
+                return response
+            } catch (error) {
+                return rejectWithValue(error.message)
+            }
+        }
+) 
 
 export const CommentsSlice = createSlice({
     name: "comments",
@@ -61,6 +73,9 @@ export const CommentsSlice = createSlice({
         .addCase(UpdateComment.pending, LoadingCase)
         .addCase(UpdateComment.fulfilled, Comments_SuccessCase)
         .addCase(UpdateComment.rejected, FailedCase)
+        .addCase(DeleteComment.pending, LoadingCase)
+        .addCase(DeleteComment.fulfilled, Comments_SuccessCase)
+        .addCase(DeleteComment.rejected, FailedCase)
     }
 })
 
