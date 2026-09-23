@@ -39,6 +39,12 @@ export const User_SuccessCase = (state, action) => {
     ClearSuccessMessage()
     console.log("User successfully updated:", state.user)
 }
+export const Comments_SuccessCase = (state, action) => {
+     state.loading = false
+    state.comments = action.payload.data
+    state.successMessage = action.payload.message
+    state.success = true;
+}
 export const FailedCase = (state, action) => {
     state.loading = false
     state.error = action.payload

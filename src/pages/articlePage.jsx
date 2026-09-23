@@ -4,12 +4,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import { DeleteArticle } from "../store/slices/articlesSlice";
+import { CreateComment } from "../store/slices/commentsSlice";
 import { use } from "react";
 import { useEffect } from "react";
 import {UpdateArticle} from "../store/slices/articlesSlice";
 
 
-
+const CommentsPage = ({articleId}) => {
+    const dispatch = useDispatch();
+    const onSubmitComment = (articleID, commentData) => {
+        dispatch(CreateComment({articleID, commentData})).unwrap();
+    }
+    const {comments} = useSelector((state) => state.comments)
+    const {user} = useSelector((state) => state.user)
+    const articleComments = comments.filter((comment) => comment.articleID === articleId)
+    return (
+        <div className="comments-page-container">
+            {articleComments.map((comment) => (
+                <div key={comment.id} className="comment">
+                    <p>{comment.content}</p>
+                </div>
+            ))}
+            <div className="add-comment-section">
+                <input type="text" placeholder="Add a comment..." id="comment-input" />
+                <button type="button" onClick={() => {
+                    if (!document.getElementById("comment-input").value) return;
+                    const commentInput = document.getElementById("comment-input");
+                    const commentData = { content: commentInput.value, username: user.username, email: user.email };
+                    console.log(commentData);
+                    onSubmitComment(articleId, commentData);
+                    commentInput.value = "";
+                }}>Submit</button>
+            </div>
+        </div>
+    )
+}
 
 const toHTML = (text) => DOMPurify.sanitize((text ?? "").replace(/\n/g, "<br>"));
 
@@ -76,6 +105,7 @@ const ArticlePage = ({id}) => {
                 </div>
             ))}
                 </div>
+            <CommentsPage articleId={id} />
                 
                </div>
                 <div className="infobox infobox-desktop">
