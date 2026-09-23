@@ -91,6 +91,10 @@ export const ArticlesSlice = createSlice({
         .addCase(UpdateArticle.pending, LoadingCase)
         .addCase(UpdateArticle.fulfilled, Article_SuccessCase)
         .addCase(UpdateArticle.rejected, FailedCase)
+        builder
+        .addCase(DeleteArticle.pending, LoadingCase)
+        .addCase(DeleteArticle.fulfilled, Article_SuccessCase)
+        .addCase(DeleteArticle.rejected, FailedCase)
     }
 })
 

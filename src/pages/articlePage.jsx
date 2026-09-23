@@ -1,4 +1,4 @@
-import { CreateComment, LoadComments, DeleteComment } from "../store/slices/commentsSlice";
+import { CreateComment, LoadComments, DeleteComment, LikeComment, UnlikeComment } from "../store/slices/commentsSlice";
 import { Link, useNavigate } from "react-router-dom";
 import "../pages/articlePage.css"
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,17 @@ import { useEffect } from "react";
 import {UpdateArticle} from "../store/slices/articlesSlice";
 
 
+
+
 const CommentsPage = ({articleId}) => {
+    const hasLikedComment = (comment) => {
+        if (!user) return false;
+        return comment.likes?.some((like) => like.userID === user.id && like.type === "Like");
+    }
+    const hasDislikedComment = (comment) => {
+        if (!user) return false;
+        return comment.likes?.some((like) => like.userID === user.id && like.type === "Dislike");
+    }
     const dispatch = useDispatch();
     const onSubmitComment = ({articleID, commentData}) => {
         dispatch(CreateComment({articleID, commentData})).unwrap();
@@ -24,14 +34,15 @@ const CommentsPage = ({articleId}) => {
     const articleComments = comments;
     return (
         <div className="comments-page-container">
-            <h2>Comments</h2>
-            {articleComments.length === 0 ? (
+            <div className="comments-header">
+                <h2>Comments</h2>
+            </div>
+            <div className="comments-content-section">
+                {articleComments.length === 0 ? (
                 <>
                  <p>No comments yet. {user && "Be the first to comment!"}</p>
-                    <p>{!user && ""}</p>
+                    <p>{!user && <Link to="/login">Log in to be the first to comment!</Link>}</p>
                 </>
-               
-                
             ) : articleComments.map((comment) => (
                 <div key={comment.id} className="commentCard" style={{position: "relative", backgroundColor: `${user && user.role === "SUPERADMIN" ? "#f6d7d3" : "#f8fcf8"}`}}>
                     <div className="comment-card-controls">
@@ -41,10 +52,23 @@ const CommentsPage = ({articleId}) => {
                             }}>Delete</button>
                         )}
                         </div>
-                    <h5>{comment.username} ({comment.email})</h5>
+                    <h5>{comment.username}</h5>
                     <p>{comment.content}</p>
+                    <div className="comment-card-actions">
+                        {user && (
+                            <>
+                                <button type="button" onClick={() => {
+                                    dispatch(LikeComment({commentId: comment.id, type: "Like", userID: user.id, articleID: articleId})).unwrap();
+                                }} style={{color: hasLikedComment(comment) ? "blue" : "black"}}>Like</button>
+                                <button type="button" onClick={() => {
+                                    dispatch(UnlikeComment({commentId: comment.id, type: "Dislike", userID: user.id, articleID: articleId})).unwrap();
+                                }} style={{color: hasDislikedComment(comment) ? "red" : "black"}}>Dislike</button>
+                            </>
+                        )}
+                    </div>
                 </div>
             ))}
+            </div>
             {user && (
             <div className="add-comment-section">
                 <input type="text" placeholder="Add a comment..." id="comment-input" />
@@ -128,7 +152,7 @@ const ArticlePage = ({id}) => {
                 </div>
             ))}
                 </div>
-            <CommentsPage articleId={id} />
+           
                 
                </div>
                 <div className="infobox infobox-desktop">
@@ -141,9 +165,12 @@ const ArticlePage = ({id}) => {
                         </div>
                     ))}
                 </div>
+                
             
             </div>
-            
+            <div className="comments-section">
+                     <CommentsPage articleId={id} />
+                    </div>
         </div>
     )
 }

@@ -57,6 +57,28 @@ export const DeleteComment = createAsyncThunk(
             }
         }
 ) 
+export const LikeComment = createAsyncThunk(
+    "articles/comments/like",
+     async({commentId, type, userID, articleID}, {rejectWithValue}) => {
+            try {
+                const response = await APICall({endpoint: `gitspedia/articles/comments/like/${commentId}`, method: "POST", data: {type, userID, articleID}})
+                return response
+            } catch (error) {
+                return rejectWithValue(error.message)
+            }
+        }
+) 
+export const UnlikeComment = createAsyncThunk(
+    "articles/comments/unlike",
+     async({commentId, type, userID, articleID}, {rejectWithValue}) => {
+            try {
+                const response = await APICall({endpoint: `gitspedia/articles/comments/unlike/${commentId}`, method: "POST", data: {type, userID, articleID}})
+                return response
+            } catch (error) {
+                return rejectWithValue(error.message)
+            }
+        }
+) 
 
 export const CommentsSlice = createSlice({
     name: "comments",
@@ -76,6 +98,12 @@ export const CommentsSlice = createSlice({
         .addCase(DeleteComment.pending, LoadingCase)
         .addCase(DeleteComment.fulfilled, Comments_SuccessCase)
         .addCase(DeleteComment.rejected, FailedCase)
+        .addCase(LikeComment.pending, LoadingCase)
+        .addCase(LikeComment.fulfilled, Comments_SuccessCase)
+        .addCase(LikeComment.rejected, FailedCase)
+        .addCase(UnlikeComment.pending, LoadingCase)
+        .addCase(UnlikeComment.fulfilled, Comments_SuccessCase)
+        .addCase(UnlikeComment.rejected, FailedCase)
     }
 })
 
