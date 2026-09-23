@@ -59,7 +59,7 @@ const CommentsPage = ({articleId}) => {
                             }}>Delete</button>
                         )}
                         </div>
-                    <h5>{comment.username}</h5>
+                    <h5>{comment.username}-----{new Date(comment.createdAt).toLocaleString()}</h5>
                     <p>{comment.content}</p>
                     <div className="comment-card-actions">
                         {user && (

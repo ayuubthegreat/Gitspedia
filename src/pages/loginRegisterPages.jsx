@@ -58,7 +58,7 @@ export const LoginPage = () => {
                     const [username, email, id] = userId.split(":");
                     return (
                         <div className="recent-user-card recent-user" key={index} onClick={() => loginFromRecentUser(id)}>
-                           {username} - {email}
+                           {username} - {email} - {id}
                         </div>
                     );
                 })}

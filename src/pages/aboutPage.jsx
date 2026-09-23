@@ -25,7 +25,7 @@ export default function AboutPage() {
         <section className="about-section wikipedia-example">
             <div className='textBox'>
                 <h2>You've heard of Wikipedia, right?</h2>
-                <p>The massive website with thousands if not millions of articles? The eleventh most visisted website? Well..obviously we can't reach those heights, but we can certainly try and adopt the online encyclopedia format, which is what we've done.</p>
+                <p>The massive website with thousands if not millions of articles? The eleventh most visited website? Well..obviously we can't reach those heights, but we can certainly try and adopt the online encyclopedia format, which is what we've done.</p>
             </div>
         </section>
         <section className="about-section features-parent">
