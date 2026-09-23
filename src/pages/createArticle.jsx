@@ -41,11 +41,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
         } else {
             dispatch(CreateArticle({articleData: data})).unwrap()
         }
-        if (isEditing) {
-            nav(`/articles/${articleData.id}`);
-        } else {
-            nav("/articles");
-        }
+        nav("/articles")
     }
     const SetDefaultValuesParagraphs = (index) => {
         const paragraph = paragraphData[index];
