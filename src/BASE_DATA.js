@@ -1,4 +1,4 @@
 export const BASE_DATA = {
-    url: "http://localhost:3005",
+    url: "https://haraka-api-ysy9.vercel.app",
     studio_name: "Crescent Moon Studio",
 }
