@@ -23,8 +23,7 @@ const ArticlePage = ({id}) => {
     useEffect(() => {
     if (!hasViewedArticle) {
         setHasViewedArticle(true);
-       dispatch(UpdateArticle({id, data: { views: (article.views ?? 0) + 1 }}))
-       
+       dispatch(UpdateArticle({articleData: {...article, views: (article.views ?? 0) + 1}})).unwrap();
     }
 }, [hasViewedArticle]);
     if (!article) {
@@ -47,6 +46,7 @@ const ArticlePage = ({id}) => {
             <div className="separator"></div>
             <div className="article-main-container">
                 <div className="article-main-content">
+                    <h6>{article.views ?? 0} views</h6>
                     <div className="article-header">
                      <h1>{article.title}</h1>
                      {article.tags && article.tags.length > 0 && <div className="article-tags">

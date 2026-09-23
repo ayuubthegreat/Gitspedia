@@ -36,6 +36,7 @@ export const CreateArticlePage = ({isEditing = false, articleData = null }) => {
         console.log("Form submitted with data:", data);
         if (isEditing && articleData) {
             data.id = articleData.id;
+            data.views = articleData.views ?? 0;
             dispatch(UpdateArticle({articleData: data})).unwrap()
         } else {
             dispatch(CreateArticle({articleData: data})).unwrap()
