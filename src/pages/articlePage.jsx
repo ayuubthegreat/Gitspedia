@@ -46,6 +46,7 @@ const ArticlePage = ({id}) => {
             <div className="separator"></div>
             <div className="article-main-container">
                 <div className="article-main-content">
+                    <button>Comments</button>
                     <h6>{article.views ?? 0} views</h6>
                     <div className="article-header">
                      <h1>{article.title}</h1>
