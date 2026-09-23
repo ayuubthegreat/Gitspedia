@@ -1,9 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../pages/articlePage.css"
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import DOMPurify from "dompurify";
 import { DeleteArticle } from "../store/slices/articlesSlice";
 import { use } from "react";
+import { useEffect } from "react";
+import {UpdateArticle} from "../store/slices/articlesSlice";
+
+
 
 
 const toHTML = (text) => DOMPurify.sanitize((text ?? "").replace(/\n/g, "<br>"));
@@ -13,7 +18,15 @@ const ArticlePage = ({id}) => {
     const navigate = useNavigate();
     const {articles} = useSelector((state) => state.articles)
     const {user} = useSelector((state) => state.user)
+    const [hasViewedArticle, setHasViewedArticle] = useState(false);
     const article = articles.find((article) => article.id === id);
+    useEffect(() => {
+    if (!hasViewedArticle) {
+        setHasViewedArticle(true);
+       dispatch(UpdateArticle({id, data: { views: (article.views ?? 0) + 1 }}))
+       
+    }
+}, [hasViewedArticle]);
     if (!article) {
         return <p>Article not found.</p>
     }

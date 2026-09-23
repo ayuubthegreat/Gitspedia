@@ -25,6 +25,9 @@ const  Navbar = () => {
         dispatch(Logout());
         nav("/login");
     }
+    const handleNavLinkClick = () => {
+        setRevealed(false);
+    }
     return (
         <>
         <nav className="top-nav">
@@ -37,17 +40,17 @@ const  Navbar = () => {
                 {user && user.role === "SUPERADMIN" && <Link className="nav-link nav-link-accent" to={"/create"}>Create Article</Link>}
                 {user ? <span className="nav-user">Welcome, {user.username}!</span> : <Link className="nav-link" to={"/login"}>Login</Link>}
                 {!user && <Link className="nav-link" to={"/register"}>Register</Link>}
-                {user && <button className="nav-link" onClick={LogoutFunction}>Logout</button>}
+                {user && <button className="nav-link logout-button" onClick={LogoutFunction}>Logout</button>}
             </div>
             <div className="nav-links-mobile">
                 <button className="nav-links-mobile-button" onClick={() => setRevealed(!revealed)}>☰</button>
                {revealed && <div className="nav-links-mobile-dropdown">
-                    <Link className="nav-link" to={"/about"}>About</Link>
-                    <Link className="nav-link" to={"/articles"}>Articles</Link>
-                    {user && user.role === "SUPERADMIN" && <Link className="nav-link nav-link-accent" to={"/create"}>Create Article</Link>}
-                    {user ? <span className="nav-user">Welcome, {user.username}!</span> : <Link className="nav-link" to={"/login"}>Login</Link>}
-                {!user && <Link className="nav-link" to={"/register"}>Register</Link>}
-                {user && <button className="nav-link" onClick={LogoutFunction}>Logout</button>}
+                    <Link className="nav-link" to={"/about"} onClick={handleNavLinkClick}>About</Link>
+                    <Link className="nav-link" to={"/articles"} onClick={handleNavLinkClick}>Articles</Link>
+                    {user && user.role === "SUPERADMIN" && <Link className="nav-link nav-link-accent" to={"/create"} onClick={handleNavLinkClick}>Create Article</Link>}
+                    {user ? <span className="nav-user">Welcome, {user.username}!</span> : <Link className="nav-link" to={"/login"} onClick={handleNavLinkClick}>Login</Link>}
+                {!user && <Link className="nav-link" to={"/register"} onClick={handleNavLinkClick}>Register</Link>}
+                {user && <button className="nav-link logout-button" onClick={LogoutFunction}>Logout</button>}
                 </div>}
             </div>
             <div className="nav-search">

@@ -72,7 +72,14 @@
     background: #ecf6ef;
     border: 1px solid #cbe0d2;
 }
-
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 16px;
+    text-align: center;
+}
 .search-bar {
     max-width: 220px;
     min-width: 140px;
@@ -97,13 +104,25 @@
 .search-result-item:hover {
     background: #ecf6ef;
 }
-
+   .logout-button {
+        font-size: 20px;
+        color: white;
+        background: orange;
+        border-radius: 0;
+    }
+    .logout-button:hover {
+        background: darkorange;
+        color: black;
+    }
 @media (max-width: 920px) {
     .top-nav {
          position: relative;
     }
     .search-bar {
         display: none;
+    }
+    .nav-link {
+        text-align: center;
     }
     .nav-links {
         display: none;
@@ -116,5 +135,9 @@
     .nav-links-mobile-dropdown {
         display: flex;
     }
+    .nav-user {
+        font-size: 15px;
+    }
+ 
 
 }

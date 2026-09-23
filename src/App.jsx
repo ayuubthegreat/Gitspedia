@@ -13,6 +13,7 @@ import { CreateArticlePage } from './pages/createArticle.jsx'
 import ArticlePage from './pages/articlePage.jsx'
 import AuthenticationFirewall from '../middleware/AuthenticationFirewall.jsx'
 import AboutPage from './pages/aboutPage.jsx'
+import Footer from './components/footer.jsx'
 
 function App() {
     const {articles} = useSelector((state) => state.articles)
@@ -48,6 +49,7 @@ function App() {
                         <Route path="/register" element={<RegisterPage />} />
                     </Routes>
                 </main>
+                <Footer/>
             </div>
         </BrowserRouter>
     )
