@@ -1,7 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+
 import axios from "axios";
 import { BASE_DATA } from "../BASE_DATA";
-import { ClearSuccessMessage } from "./slices/usersSlice";
 
 
 export const APICall = async ({endpoint, method = "GET", data = null}) => {
@@ -36,7 +35,6 @@ export const User_SuccessCase = (state, action) => {
     state.successMessage = action.payload.message
     state.success = true;
     localStorage.setItem("user", state.user.id.toString())
-    ClearSuccessMessage()
     console.log("User successfully updated:", state.user)
 }
 export const Comments_SuccessCase = (state, action) => {
