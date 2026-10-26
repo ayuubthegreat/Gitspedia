@@ -1,6 +1,7 @@
 .flex {
  display: flex;
- fle
+ flex-direction: column;
+ 
 }
 .row {
   flex-direction: column;
@@ -8,9 +9,26 @@
 .center {
   justify-content: center;
 }
+.center-text {
+  text-align: center;
+}
 .middle {
   align-items: center;
 }
+div {
+  border: 1px solid black;
+}
 .header {
-  line-height: 10px;
+  padding: 10vw;
+}
+.heading-text {
+  font-size: 40px;
+  text-align: center;
+}
+.subheading-text {
+  font-size: 15px;
+}
+
+.full {
+  width: 95%;
 }
