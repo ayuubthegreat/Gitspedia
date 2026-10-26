@@ -1,4 +1,5 @@
 export const BASE_DATA = {
     URL: "",
-    STUDIO_NAME: "Crescent Moon Studio"
+    STUDIO_NAME: "Crescent Moon Studio",
+    WEBSITE_NAME: "Gitspedia"
 }
