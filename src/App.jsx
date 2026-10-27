@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LoadArticles } from './store/slices/articlesSlice.js'
 import HomePage from './pages/home.jsx'
+import Navbar from './components/Navbar.jsx'
 
 function App() {
     const {articles} = useSelector((state) => state.articles)
@@ -16,6 +17,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className="app-shell">
+                <Navbar/>
                 <main className="page-shell">
                     <Routes>
                         <Route path='/' element={<HomePage/>}/>

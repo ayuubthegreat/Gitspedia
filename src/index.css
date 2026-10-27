@@ -45,5 +45,8 @@ nav .search-bar {
 	flex-direction: column;
 	min-height: 720px;
 }
+.pointer:hover {
+	cursor: pointer;
+}
 
 
