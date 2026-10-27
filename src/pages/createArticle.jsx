@@ -74,25 +74,29 @@ const CreateArticlePage = () => {
                       <h1>Create Content Block</h1>  
                     </div>
                     <div className="flex overflow-scroll">
-                                {currentContentBlock.map((parentBlock) => {
+                                {currentContentBlock.map((parentBlock = {}, i) => {
                         return (
                             <>
                            {Object.entries(parentBlock).map(([key, value]) => (
             <>
+            <button onClick={() => {
+                const newBlock = [...currentContentBlock];
+                delete newBlock[i][key];
+                setCurrentContentBlock(newBlock);
+            }}>Delete</button>
             <select onChange={(e) => {
-                if (e.currentTarget.value === "None") {
-                    prompt("You want to remove this element.");
-                }
+                
             }}>
                 {contentTypes.map((val) => {
                     return (
                         <>
+                        
                         <option value={val}>{val}</option>
                         </>
                     )
                 })}
             </select>
-            <textarea></textarea>
+            <textarea onChange={(e) => {}}></textarea>
             </>
         ))}
                             </>
@@ -104,7 +108,13 @@ const CreateArticlePage = () => {
                        <button onClick={() => {
                         setCurrentContentBlock([...currentContentBlock, {[contentTypes[0]]: "jj"}])
                     }}><PlusCircle/>Add Key</button>
-                    <button>Create Block</button> 
+                    <button onClick={() => {
+                        const tempContentBlocks = [...contentBlocks];
+                        tempContentBlocks.push(currentContentBlock);
+                        setContentBlocks(tempContentBlocks);
+                        setCurrentContentBlock([]);
+                        setDisplayWindow(false);
+                    }}>Create Block</button> 
                     </div>
                     
                 </div>
