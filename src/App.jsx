@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LoadArticles, setSelectedArticle } from './store/slices/articlesSlice.js'
 import HomePage from './pages/home.jsx'
 import Navbar from './components/Navbar.jsx'
+import Footer from './components/footer.jsx'
 
 function App() {
     const {articles, filteredArticle} = useSelector((state) => state.articles)
@@ -35,7 +36,7 @@ function App() {
                         
                     </Routes>
                 </main>
-               
+                <Footer/>
             </div>
         </BrowserRouter>
     )
