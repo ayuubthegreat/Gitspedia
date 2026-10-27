@@ -15,7 +15,7 @@ const CreateArticlePage = () => {
     const [displayWindow, setDisplayWindow] = useState(false);
     const [contentBlocks, setContentBlocks] = useState([]);
     const [currentContentBlock, setCurrentContentBlock] = useState([]);
-    const contentTypes = ["paragraph", "author's note", "link"]
+    const contentTypes = ["paragraph", "author's note", "link", "None"]
     const pages = [(<>
     <div>
         <h3>Title</h3>
@@ -68,17 +68,22 @@ const CreateArticlePage = () => {
         <div className="full center-text">
             <div>
                 {displayWindow && (<>
-                <div className="display-window">
+                <div className="backdrop">
+                    <div className="display-window full">
                     <div>
                       <h1>Create Content Block</h1>  
                     </div>
-                    <div className="flex">
+                    <div className="flex overflow-scroll">
                                 {currentContentBlock.map((parentBlock) => {
                         return (
                             <>
                            {Object.entries(parentBlock).map(([key, value]) => (
             <>
-            <select>
+            <select onChange={(e) => {
+                if (e.currentTarget.value === "None") {
+                    prompt("You want to remove this element.");
+                }
+            }}>
                 {contentTypes.map((val) => {
                     return (
                         <>
@@ -103,6 +108,8 @@ const CreateArticlePage = () => {
                     </div>
                     
                 </div>
+                </div>
+                
                 </>)}
                 <div className="header">
                     <h1>Create Gitspedia Article</h1>
