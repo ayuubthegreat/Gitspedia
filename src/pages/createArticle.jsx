@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form";
 import "./createArticle.css"
+import { Plus, PlusCircle } from "lucide-react";
 
 
 
@@ -10,6 +11,10 @@ const CreateArticlePage = () => {
         handleSubmit,
         reset
     } = useForm({})
+    const [pageNum, setPageNum] = useState(0);
+    const [displayWindow, setDisplayWindow] = useState(false);
+    const [contentBlocks, setContentBlocks] = useState([]);
+    const [currentContentBlock, setCurrentContentBlock] = useState([]);
     const contentTypes = ["paragraph", "author's note", "link"]
     const pages = [(<>
     <div>
@@ -29,22 +34,76 @@ const CreateArticlePage = () => {
         <textarea className="full" {...register("long_desc")} placeholder="Long description"/>
     </div>
     </>), (<>
+        
         <div>
             <h3>Content</h3>
             <div>
-                
+                {[...contentBlocks].map((val) => {
+                    return (
+                        <>
+                         {val.map((block) => {
+                            return (
+                                <>
+                                {Object.entries(block).map(([key, value]) => (
+            <p key={key}>
+                {key}: {value}
+            </p>
+        ))}
+                                </>
+                            )
+                         })}
+                        </>
+                    )
+                })}
+                <button className="flex middle row" onClick={() => {setDisplayWindow(true);}}><PlusCircle></PlusCircle>Create Content Block</button>
             </div>
         </div>
     </>), (<>
     
     </>)]
-    const [pageNum, setPageNum] = useState(0);
-    const [displayWindow, setDisplayWindow] = useState(false);
+    
     
     return (
         <>
         <div className="full center-text">
             <div>
+                {displayWindow && (<>
+                <div className="display-window">
+                    <div>
+                      <h1>Create Content Block</h1>  
+                    </div>
+                    <div className="flex">
+                                {currentContentBlock.map((parentBlock) => {
+                        return (
+                            <>
+                           {Object.entries(parentBlock).map(([key, value]) => (
+            <>
+            <select>
+                {contentTypes.map((val) => {
+                    return (
+                        <>
+                        <option value={val}>{val}</option>
+                        </>
+                    )
+                })}
+            </select>
+            <textarea></textarea>
+            </>
+        ))}
+                            </>
+                        )
+                    })}
+                    </div>
+            
+                    <div>
+                       <button onClick={() => {
+                        setCurrentContentBlock([...currentContentBlock, {[contentTypes[0]]: "jj"}])
+                    }}><PlusCircle/>Add Key</button>
+                    <button>Create Block</button> 
+                    </div>
+                    
+                </div>
+                </>)}
                 <div className="header">
                     <h1>Create Gitspedia Article</h1>
                 </div>

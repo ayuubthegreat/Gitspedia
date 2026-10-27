@@ -36,3 +36,7 @@ div {
   width: 95%;
   max-width: 700px;
 }
+.display-window {
+  display: flex;
+  flex-direction: column;
+}
