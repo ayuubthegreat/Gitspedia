@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form";
 import "./createArticle.css"
-import { Plus, PlusCircle } from "lucide-react";
+import { Plus, PlusCircle, PlusIcon } from "lucide-react";
 
 
 
@@ -14,7 +14,6 @@ const CreateArticlePage = () => {
     const [pageNum, setPageNum] = useState(0);
     const [displayWindow, setDisplayWindow] = useState(false);
     const [contentBlocks, setContentBlocks] = useState([]);
-    const [currentContentBlock, setCurrentContentBlock] = useState([]);
     const contentTypes = ["paragraph", "author's note", "link", "None"]
     const pages = [(<>
     <div>
@@ -34,32 +33,41 @@ const CreateArticlePage = () => {
         <textarea className="full" {...register("long_desc")} placeholder="Long description"/>
     </div>
     </>), (<>
-        
         <div>
             <h3>Content</h3>
-            <div>
-                {[...contentBlocks].map((val) => {
+            <div className="">
+                {contentBlocks.length > 0 && contentBlocks.map((val, i) => {
                     return (
                         <>
-                        <div className="content-block">
-                            {val.map((block) => {
+                        {Object.entries(val).map(([key, value]) => {
                             return (
                                 <>
-                                {Object.entries(block).map(([key, value]) => (
-            <p key={key}>
-                {key}: {value}
-            </p>
-        ))}
+                                <button onClick={() => {
+                                    const tempBlocks = [...contentBlocks];
+                                    delete tempBlocks[i];
+                                    setContentBlocks(tempBlocks);
+                                }}>Delete</button>
+                                <select>
+                                    {[...contentTypes].map((contentType) => {
+                                        return (
+                                            <>
+                                            <option value={contentType}>{contentType}</option>
+                                            </>
+                                        )
+                                    })}
+                                </select>
+                                <textarea onChange={() => {
+
+                                }}></textarea>
                                 </>
                             )
-                         })} 
-                        </div>
-                        
+                        })}
+                        <button>Create New Field</button>
                         </>
                     )
                 })}
-                <button className="flex middle row" onClick={() => {setDisplayWindow(true);}}><PlusCircle></PlusCircle>Create Content Block</button>
             </div>
+            <button onClick={() => {setContentBlocks([...contentBlocks, {[contentTypes[0]]: "Value"}])}}><PlusIcon></PlusIcon>Create Content Block</button>
         </div>
     </>), (<>
     
@@ -70,69 +78,7 @@ const CreateArticlePage = () => {
         <>
         <div className="full center-text">
             <div>
-                {displayWindow && (<>
-                <div className="backdrop">
-                    <div className="display-window full">
-                    <div>
-                      <h1>Create Content Block</h1>  
-                    </div>
-                    <div className="flex overflow-scroll">
-                                {currentContentBlock.map((parentBlock = {}, i) => {
-                        return (
-                            <>
-                           {Object.entries(parentBlock).map(([key, value]) => (
-            <>
-            <button onClick={() => {
-                const newBlock = [...currentContentBlock];
-                delete newBlock[i][key];
-                setCurrentContentBlock(newBlock);
-            }}>Delete</button>
-            <select onChange={(e) => {
-                const newKey = e.target.value
-
-        setCurrentContentBlock((previous) =>
-            previous.map((block, index) => {
-                if (index !== i || !(key in block)) return block
-
-                const { [key]: value, ...rest } = block
-                return { ...rest, [newKey]: value }
-            })
-        )
-            }}>
-                {contentTypes.map((val) => {
-                    return (
-                        <>
-                        
-                        <option value={val}>{val}</option>
-                        </>
-                    )
-                })}
-            </select>
-            <textarea onChange={(e) => {parentBlock[key] = e.target.value;}}></textarea>
-            </>
-        ))}
-                            </>
-                        )
-                    })}
-                    </div>
-            
-                    <div>
-                       <button onClick={() => {
-                        setCurrentContentBlock([...currentContentBlock, {[contentTypes[0]]: "jj"}])
-                    }}><PlusCircle/>Add Key</button>
-                    <button onClick={() => {
-                        const tempContentBlocks = [...contentBlocks];
-                        tempContentBlocks.push(currentContentBlock);
-                        setContentBlocks(tempContentBlocks);
-                        setCurrentContentBlock([]);
-                        setDisplayWindow(false);
-                    }}>Create Block</button> 
-                    </div>
-                    
-                </div>
-                </div>
                 
-                </>)}
                 <div className="header">
                     <h1>Create Gitspedia Article</h1>
                 </div>
