@@ -5,6 +5,7 @@ import { APICall, Article_SuccessCase, FailedCase, LoadingCase, User_SuccessCase
 
 export const initialState = {
     articles: [],
+    filteredArticle: {},
     user: null,
     success: false,
     successMessage: "",
@@ -17,7 +18,7 @@ export const LoadArticles = createAsyncThunk(
     "articles/load",
     async(_, {rejectWithValue}) => {
         try {
-            const response = await APICall({endpoint: "gitspedia/articles/", method: "GET"})
+            const response = await APICall({endpoint: "gitspedia/articles", method: "GET"})
             return response
         } catch (error) {
             return rejectWithValue(error.message)
@@ -39,7 +40,7 @@ export const CreateArticle = createAsyncThunk(
     "articles/create",
     async({articleData}, {rejectWithValue}) => {
         try {
-            const response = await APICall({endpoint: "gitspedia/articles/", method: "POST", data: articleData})
+            const response = await APICall({endpoint: "gitspedia/articles", method: "POST", data: articleData})
             return response
         } catch (error) {
             return rejectWithValue(error.message)
@@ -73,7 +74,11 @@ export const DeleteArticle = createAsyncThunk(
 export const ArticlesSlice = createSlice({
     name: "articles",
     initialState,
-    reducers: {},
+    reducers: {
+        setSelectedArticle: (state, action) => {
+            state.filteredArticle = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(LoadArticles.pending, LoadingCase)
@@ -97,5 +102,5 @@ export const ArticlesSlice = createSlice({
         .addCase(DeleteArticle.rejected, FailedCase)
     }
 })
-
+export const {setSelectedArticle} = ArticlesSlice.actions;
 export default ArticlesSlice.reducer

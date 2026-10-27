@@ -7,7 +7,7 @@ export const APICall = async ({endpoint, method = "GET", data = null}) => {
     try {
         const response = await axios({
             method,
-            url: `${BASE_DATA.url}/${endpoint}`,
+            url: `${BASE_DATA.URL}/${endpoint}`,
             data: data
         })
         return response.data
@@ -26,6 +26,7 @@ export const Article_SuccessCase = (state, action) => {
     state.loading = false
     state.articles = action.payload.data
     state.successMessage = action.payload.message
+    console.log(action.payload.data);
     state.success = true;
 }
 export const User_SuccessCase = (state, action) => {
