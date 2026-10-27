@@ -36,7 +36,7 @@ const CreateArticlePage = ({article}) => {
         <div>
             <h3>Content</h3>
             <div className="flex full overflow-scroll">
-                {contentBlocks.length > 0 && contentBlocks.map((val, i) => {
+                {contentBlocks.length > 0 ? contentBlocks.map((val, i) => {
                     return (
                         <>
                         {Object.entries(val).map(([key, value]) => {
@@ -46,7 +46,7 @@ const CreateArticlePage = ({article}) => {
                                     const tempBlocks = [...contentBlocks].filter((val, j) => i !== j)
                                     setContentBlocks(tempBlocks);
                                 }}>Delete</button>
-                                <select onChange={(e) => {
+                                <select value={key} onChange={(e) => {
                                      const tempBlocks = [...contentBlocks].filter((val, j) => i !== j);
                                     tempBlocks.push({[e.currentTarget.value]: value});
                                     setContentBlocks(tempBlocks);
@@ -60,7 +60,7 @@ const CreateArticlePage = ({article}) => {
                                         )
                                     })}
                                 </select>
-                                <textarea className={`${key}-textarea`} onChange={(e) => {
+                                <textarea value={value} className={`${key}-textarea`} onChange={(e) => {
                                     const tempBlocks = [...contentBlocks].filter((val, j) => i !== j);
                                     tempBlocks.push({[key]: e.currentTarget.value});
                                     setContentBlocks(tempBlocks);
@@ -71,7 +71,9 @@ const CreateArticlePage = ({article}) => {
                         })}
                         </>
                     )
-                })}
+                }) : (<>
+                <p>No content blocks created.</p>
+                </>)}
             </div>
             <button onClick={() => {setContentBlocks([...contentBlocks, {[contentTypes[0]]: ""}])}}><PlusIcon></PlusIcon>Create Content Block</button>
         </div>

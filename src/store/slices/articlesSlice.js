@@ -3,6 +3,25 @@ import { APICall, Article_SuccessCase, FailedCase, LoadingCase, User_SuccessCase
 
 
 
+export const articleSchema = {
+    title: "",
+    slug: "",
+    shortDesc: "",
+    longDesc: "",
+    displayImgContent: {},
+    content: {},
+    infoboxFields: {},
+}
+export const articleContentSchema = {
+    text: "",
+    link: "",
+    img_link: "",
+    img_desc: "",
+}
+export const articleInfoboxSchema = {
+    key: "",
+    value: ""
+}
 export const initialState = {
     articles: [],
     filteredArticle: {},
