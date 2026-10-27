@@ -59,8 +59,7 @@ nav .search-bar {
 }
 
 textarea {
-	min-height: 160px;
-	resize: vertical;
+	resize: none;
 }
 .display-window {
 	padding: 6vw 10vw;
@@ -72,6 +71,15 @@ textarea {
 	 background-color: rgba(0, 0, 0, 0.6);
 	 z-index: 1000;
 	position: fixed;
+}
+.paragraph-textarea {
+	min-height: 160px;
+}
+.link-textarea {
+	min-height: 30px;
+}
+.author-note-textarea {
+	min-height: 80px;
 }
 
 

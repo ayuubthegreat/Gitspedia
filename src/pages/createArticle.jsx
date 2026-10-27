@@ -5,7 +5,7 @@ import { Plus, PlusCircle, PlusIcon } from "lucide-react";
 
 
 
-const CreateArticlePage = () => {
+const CreateArticlePage = ({article}) => {
     const {
         register,
         handleSubmit,
@@ -14,7 +14,7 @@ const CreateArticlePage = () => {
     const [pageNum, setPageNum] = useState(0);
     const [displayWindow, setDisplayWindow] = useState(false);
     const [contentBlocks, setContentBlocks] = useState([]);
-    const contentTypes = ["paragraph", "author's note", "link", "None"]
+    const contentTypes = ["paragraph", "author-note", "link"]
     const pages = [(<>
     <div>
         <h3>Title</h3>
@@ -35,7 +35,7 @@ const CreateArticlePage = () => {
     </>), (<>
         <div>
             <h3>Content</h3>
-            <div className="">
+            <div className="flex full overflow-scroll">
                 {contentBlocks.length > 0 && contentBlocks.map((val, i) => {
                     return (
                         <>
@@ -43,11 +43,15 @@ const CreateArticlePage = () => {
                             return (
                                 <>
                                 <button onClick={() => {
-                                    const tempBlocks = [...contentBlocks];
-                                    delete tempBlocks[i];
+                                    const tempBlocks = [...contentBlocks].filter((val, j) => i !== j)
                                     setContentBlocks(tempBlocks);
                                 }}>Delete</button>
-                                <select>
+                                <select onChange={(e) => {
+                                     const tempBlocks = [...contentBlocks].filter((val, j) => i !== j);
+                                    tempBlocks.push({[e.currentTarget.value]: value});
+                                    setContentBlocks(tempBlocks);
+                                    console.log(tempBlocks);
+                                }}>
                                     {[...contentTypes].map((contentType) => {
                                         return (
                                             <>
@@ -56,18 +60,20 @@ const CreateArticlePage = () => {
                                         )
                                     })}
                                 </select>
-                                <textarea onChange={() => {
-
+                                <textarea className={`${key}-textarea`} onChange={(e) => {
+                                    const tempBlocks = [...contentBlocks].filter((val, j) => i !== j);
+                                    tempBlocks.push({[key]: e.currentTarget.value});
+                                    setContentBlocks(tempBlocks);
+                                    console.log(tempBlocks);
                                 }}></textarea>
                                 </>
                             )
                         })}
-                        <button>Create New Field</button>
                         </>
                     )
                 })}
             </div>
-            <button onClick={() => {setContentBlocks([...contentBlocks, {[contentTypes[0]]: "Value"}])}}><PlusIcon></PlusIcon>Create Content Block</button>
+            <button onClick={() => {setContentBlocks([...contentBlocks, {[contentTypes[0]]: ""}])}}><PlusIcon></PlusIcon>Create Content Block</button>
         </div>
     </>), (<>
     
