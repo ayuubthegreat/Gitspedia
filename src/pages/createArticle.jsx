@@ -41,7 +41,8 @@ const CreateArticlePage = () => {
                 {[...contentBlocks].map((val) => {
                     return (
                         <>
-                         {val.map((block) => {
+                        <div className="content-block">
+                            {val.map((block) => {
                             return (
                                 <>
                                 {Object.entries(block).map(([key, value]) => (
@@ -51,7 +52,9 @@ const CreateArticlePage = () => {
         ))}
                                 </>
                             )
-                         })}
+                         })} 
+                        </div>
+                        
                         </>
                     )
                 })}
@@ -85,7 +88,16 @@ const CreateArticlePage = () => {
                 setCurrentContentBlock(newBlock);
             }}>Delete</button>
             <select onChange={(e) => {
-                
+                const newKey = e.target.value
+
+        setCurrentContentBlock((previous) =>
+            previous.map((block, index) => {
+                if (index !== i || !(key in block)) return block
+
+                const { [key]: value, ...rest } = block
+                return { ...rest, [newKey]: value }
+            })
+        )
             }}>
                 {contentTypes.map((val) => {
                     return (
@@ -96,7 +108,7 @@ const CreateArticlePage = () => {
                     )
                 })}
             </select>
-            <textarea onChange={(e) => {}}></textarea>
+            <textarea onChange={(e) => {parentBlock[key] = e.target.value;}}></textarea>
             </>
         ))}
                             </>
