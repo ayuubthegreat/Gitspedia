@@ -6,6 +6,7 @@ import { LoadArticles, setSelectedArticle } from './store/slices/articlesSlice.j
 import HomePage from './pages/home.jsx'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/footer.jsx'
+import CreateArticlePage from './pages/createArticle.jsx'
 
 function App() {
     const {articles, filteredArticle} = useSelector((state) => state.articles)
@@ -33,7 +34,7 @@ function App() {
                 <main className="page-shell">
                     <Routes>
                         <Route path='/' element={<HomePage/>}/>
-                        
+                        <Route path='/create' element={<CreateArticlePage/>}/>
                     </Routes>
                 </main>
                 <Footer/>
