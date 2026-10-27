@@ -3,8 +3,11 @@
  flex-direction: column;
  
 }
+.between {
+  justify-content: space-between;
+}
 .row {
-  flex-direction: column;
+  flex-direction: row;
 }
 .center {
   justify-content: center;

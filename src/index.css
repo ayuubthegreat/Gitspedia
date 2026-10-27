@@ -49,5 +49,9 @@ nav .search-bar {
 .pointer:hover {
 	cursor: pointer;
 }
+.grid {
+	display: grid;
+	 grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr);
+}
 
 

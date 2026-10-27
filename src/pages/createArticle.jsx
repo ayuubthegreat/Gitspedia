@@ -1,0 +1,11 @@
+
+
+
+
+const CreateArticlePage = () => {
+    return (
+        <>
+        
+        </>
+    )
+}
