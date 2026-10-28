@@ -22,7 +22,7 @@ const CreateArticlePage = ({article}) => {
 
     const addNewContentBlock = () => {
          setCurrentBlockIndex(currentBlockIndex + 1);
-                        const newContentBlock = articleContentSchema;
+         const newContentBlock = articleContentSchema;
                         if (isBoldTextEnabled) {
                             newContentBlock.format.push("bold");
                         }
@@ -76,23 +76,6 @@ const CreateArticlePage = ({article}) => {
             </div>
             <div className="text-editor">
                 <textarea onChange={(e) => {
-                    const currentText = e.currentTarget.value.substring(subsectionIndex);
-                    console.log(currentText, subsectionIndex);
-                    setValue(`content.${currentBlockIndex}`, {...getValues(`content.${currentBlockIndex}`), "text": currentText, "subdivision_index": subsectionIndex })
-                    if (!beganTyping) {
-                        setCurrentBlockIndex(currentBlockIndex + 1);
-                        const newContentBlock = articleContentSchema;
-                        if (isBoldTextEnabled) {
-                            newContentBlock.format.push("bold");
-                        }
-                        if (isItalicTextEnabled) {
-                            newContentBlock.format.push("italic");
-                        }
-                        console.log(e.currentTarget.value.length - 1);
-                        setSubsectionIndex(e.currentTarget.value.length);
-                        setValue("content", [...getValues("content"), newContentBlock]);
-                        setBeganTyping(true);
-                    }
                 }}
                     className="full"
                     style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}
