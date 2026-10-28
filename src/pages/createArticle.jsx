@@ -11,21 +11,32 @@ const CreateArticlePage = ({article}) => {
     const {
         register,
         handleSubmit,
-        reset
+        reset,
+        getValues,
+        setValue
     } = useForm({defaultValues: article ?? articleSchema})
     const [pageNum, setPageNum] = useState(0);
     const [displayWindow, setDisplayWindow] = useState(false);
-    const [contentBlocks, setContentBlocks] = useState({});
+    const [contentBlocks, setContentBlocks] = useState([]);
     const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false);
     const [isItalicTextEnabled, setIsItalicTextEnabled] = useState(false);
-    
+    const [currentBlock, setCurrentBlock] = useState(articleContentSchema);
      const decipherContent = (data) => {
         let finalString = "";
-        Object.entries(contentBlocks).map(([key, val]) => {
+        for (let i = 0; i < contentBlocks.length; i++) {
+            Object.entries(contentBlocks[i]).map(([key, val]) => {
             if (key === "text") {
                 finalString += val;
             }
         })
+        }
+    }
+    const saveContentBlock = (block) => {
+        const tempContent = [...getValues("content")].filter((val) => val !== block);
+        setCurrentBlock(block);
+        tempContent.push(block);
+        setValue("content", tempContent);
+        console.log(getValues("content"));
     }
     
     const pages = [(<>
@@ -56,7 +67,9 @@ const CreateArticlePage = ({article}) => {
                 <button>See HTML</button>
             </div>
             <div className="text-editor">
-                <textarea className="full" value={decipherContent()} style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}></textarea>
+                <textarea onChange={(e) => {
+                    saveContentBlock({...articleContentSchema, text: e.currentTarget.value});
+                }} className="full" value={decipherContent(currentBlock)} style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}></textarea>
             </div>
         </div>
     </>), (<>

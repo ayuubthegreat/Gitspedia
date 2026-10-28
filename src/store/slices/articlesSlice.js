@@ -2,18 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { APICall, Article_SuccessCase, FailedCase, LoadingCase, User_SuccessCase } from "../funcs"
 
 
-
-export const articleSchema = {
-    title: "An article",
-    slug: "an-article",
-    short_desc: "An article.",
-    long_desc: "An article.",
-    displayImgContent: {},
-    content: {},
-    infoboxFields: {},
-}
 export const articleContentSchema = {
     text: "",
+    format: [],
     link: "",
     img_link: "",
     img_desc: "",
@@ -22,6 +13,16 @@ export const articleInfoboxSchema = {
     key: "",
     value: "",
 }
+export const articleSchema = {
+    title: "An article",
+    slug: "an-article",
+    short_desc: "An article.",
+    long_desc: "An article.",
+    displayImgContent: [],
+    content: [articleContentSchema],
+    infoboxFields: {},
+}
+
 export const initialState = {
     articles: [],
     filteredArticle: {},
