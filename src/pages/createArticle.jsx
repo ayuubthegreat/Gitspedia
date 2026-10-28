@@ -22,31 +22,44 @@ const CreateArticlePage = ({article}) => {
     const [contentText, setContentText] = useState("");
 
     const addNewContentBlock = () => {
-        const previousBlock = [...getValues("content")][currentBlockIndex];
-        previousBlock.end_of_subdivision = contentText.length;
-        previousBlock.text = contentText.substring(previousBlock.start_of_subdivision, previousBlock.end_of_subdivision);
-         setCurrentBlockIndex(currentBlockIndex + 1);
-         const newContentBlock = articleContentSchema;
-         newContentBlock.start_of_subdivision = contentText.length;
-         if (isBoldTextEnabled) {
-                            newContentBlock.format.push("bold");
-                        }
-                        if (isItalicTextEnabled) {
-                            newContentBlock.format.push("italic");
-                        }
-                        setValue("content", [...getValues("content"), newContentBlock]);
+        const blocks = [...getValues("content")];
+        blocks[currentBlockIndex].end_of_subdivision = contentText.length;
+        blocks[currentBlockIndex].text = contentText.substring(blocks[currentBlockIndex].start_of_subdivision, blocks[currentBlockIndex].end_of_subdivision);
+        setCurrentBlockIndex(currentBlockIndex + 1);
+        blocks.push(articleContentSchema);
+        blocks[currentBlockIndex + 1].start_of_subdivision = contentText.length;
+        if (isBoldTextEnabled) {
+            blocks[currentBlockIndex + 1].format.push("bold");
+        }
+        if (isItalicTextEnabled) {
+            blocks[currentBlockIndex + 1].format.push("italic");
+        }
         setBeganTyping(true);
+        setValue("content", blocks);
     }
     const scanForContentChange = (text) => {
-        
-       const blocks = [...getValues("content")];
-       blocks[currentBlockIndex].text = contentText.substring(blocks[currentBlockIndex].start_of_subdivision)
+        setContentText(text);
+       let blocks = [...getValues("content")];
+       console.log("Blocks length: ", blocks.length);
+       let index = currentBlockIndex;
+       if (currentBlockIndex >= blocks.length) {
+        index = blocks.length - 1;
+        setCurrentBlockIndex(index);
+       }
+       blocks[index].text = contentText.substring(blocks[index].start_of_subdivision);
+       blocks[index].end_of_subdivision = contentText.length;
        for (let i = 0; i < blocks.length; i++) {
-            if (blocks[i].start_of_subdivision > contentText.length || blocks[i].end_of_subdivision > contentText.length) {
+        if (blocks[i] === null)
+            continue;
+            if (blocks[i].end_of_subdivision > contentText.length) {
+               blocks[i].end_of_subdivision = contentText.length;
+            }
+            if (blocks[i].start_of_subdivision > contentText.length) {
                 blocks = blocks.filter((val) => val !== blocks[i]);
             }
        }
        setValue("content", blocks);
+       console.log(blocks);
     }
     const pages = [(<>
     <div>
@@ -91,15 +104,10 @@ const CreateArticlePage = ({article}) => {
             </div>
             <div className="text-editor">
                 <textarea onChange={(e) => {
-                     if (!beganTyping) {
+                    if (!beganTyping) {
                         addNewContentBlock();
                     }
-                    setContentText(e.currentTarget.value);
-                    const currentBlock = [...getValues("content")][currentBlockIndex];
-                    currentBlock.text = contentText.substring(currentBlock.start_of_subdivision - 1);
-                    setValue(`content.${currentBlockIndex}`, currentBlock);
-                   
-                    console.log(currentBlock);
+                    scanForContentChange(e.currentTarget.value);
                 }}
                     className="full"
                     style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}
