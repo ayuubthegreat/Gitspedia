@@ -8,7 +8,8 @@ export const articleContentSchema = {
     link: "",
     img_link: "",
     img_desc: "",
-    subdivision_index: 0,
+    start_of_subdivision: 0,
+    end_of_subdivision: -1,
 }
 export const articleInfoboxSchema = {
     key: "",

@@ -17,19 +17,36 @@ const CreateArticlePage = ({article}) => {
     const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
     const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false);
     const [isItalicTextEnabled, setIsItalicTextEnabled] = useState(false);
-    const [beganTyping, setBeganTyping] = useState(false);
+    const [beganTyping, setBeganTyping] = useState(true);
     const [subsectionIndex, setSubsectionIndex] = useState(0);
+    const [contentText, setContentText] = useState("");
 
     const addNewContentBlock = () => {
+        const previousBlock = [...getValues("content")][currentBlockIndex];
+        previousBlock.end_of_subdivision = contentText.length;
+        previousBlock.text = contentText.substring(previousBlock.start_of_subdivision, previousBlock.end_of_subdivision);
          setCurrentBlockIndex(currentBlockIndex + 1);
          const newContentBlock = articleContentSchema;
-                        if (isBoldTextEnabled) {
+         newContentBlock.start_of_subdivision = contentText.length;
+         if (isBoldTextEnabled) {
                             newContentBlock.format.push("bold");
                         }
                         if (isItalicTextEnabled) {
                             newContentBlock.format.push("italic");
                         }
                         setValue("content", [...getValues("content"), newContentBlock]);
+        setBeganTyping(true);
+    }
+    const scanForContentChange = (text) => {
+        
+       const blocks = [...getValues("content")];
+       blocks[currentBlockIndex].text = contentText.substring(blocks[currentBlockIndex].start_of_subdivision)
+       for (let i = 0; i < blocks.length; i++) {
+            if (blocks[i].start_of_subdivision > contentText.length || blocks[i].end_of_subdivision > contentText.length) {
+                blocks = blocks.filter((val) => val !== blocks[i]);
+            }
+       }
+       setValue("content", blocks);
     }
     const pages = [(<>
     <div>
@@ -58,7 +75,6 @@ const CreateArticlePage = ({article}) => {
                         setIsBoldTextEnabled(!isBoldTextEnabled);
                         boldBtn.classList.toggle('selected');
                         setBeganTyping(false);
-                        addNewContentBlock();
                     }
                 }} id="bold-btn"><strong>B</strong></button>
                 <button onClick={() => {
@@ -67,7 +83,6 @@ const CreateArticlePage = ({article}) => {
                         setIsItalicTextEnabled(!isItalicTextEnabled);
                         italicBtn.classList.toggle('selected');
                         setBeganTyping(false);
-                        addNewContentBlock();
                     }
                 }} id="italic-btn"><em>I</em></button>
                 <button id="add-link-btn"><LinkIcon/></button>
@@ -76,6 +91,15 @@ const CreateArticlePage = ({article}) => {
             </div>
             <div className="text-editor">
                 <textarea onChange={(e) => {
+                     if (!beganTyping) {
+                        addNewContentBlock();
+                    }
+                    setContentText(e.currentTarget.value);
+                    const currentBlock = [...getValues("content")][currentBlockIndex];
+                    currentBlock.text = contentText.substring(currentBlock.start_of_subdivision - 1);
+                    setValue(`content.${currentBlockIndex}`, currentBlock);
+                   
+                    console.log(currentBlock);
                 }}
                     className="full"
                     style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}
