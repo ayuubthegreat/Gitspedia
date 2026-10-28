@@ -19,7 +19,7 @@ const CreateArticlePage = ({article}) => {
     const [isItalicTextEnabled, setIsItalicTextEnabled] = useState(false);
     const [beganTyping, setBeganTyping] = useState(false);
     const [subsectionIndex, setSubsectionIndex] = useState(0);
-    
+
     const addNewContentBlock = () => {
          setCurrentBlockIndex(currentBlockIndex + 1);
                         const newContentBlock = articleContentSchema;
@@ -78,8 +78,7 @@ const CreateArticlePage = ({article}) => {
                 <textarea onChange={(e) => {
                     const currentText = e.currentTarget.value.substring(subsectionIndex);
                     console.log(currentText, subsectionIndex);
-                  
-                    setValue(`content.${currentBlockIndex}`, {...getValues(`content.${currentBlockIndex}`), "text": currentText })
+                    setValue(`content.${currentBlockIndex}`, {...getValues(`content.${currentBlockIndex}`), "text": currentText, "subdivision_index": subsectionIndex })
                     if (!beganTyping) {
                         setCurrentBlockIndex(currentBlockIndex + 1);
                         const newContentBlock = articleContentSchema;
