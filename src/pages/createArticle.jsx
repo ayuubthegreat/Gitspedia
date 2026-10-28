@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form";
 import "./createArticle.css"
-import { Plus, PlusCircle, PlusIcon } from "lucide-react";
+import { ImageIcon, LinkIcon, Plus, PlusCircle, PlusIcon } from "lucide-react";
 import { articleContentSchema, articleSchema } from "../store/slices/articlesSlice";
+import { Link } from "react-router-dom";
 
 
 
@@ -23,7 +24,7 @@ const CreateArticlePage = ({article}) => {
             }
         })
     }
-    const contentTypes = ["paragraph", "author-note", "link"]
+    
     const pages = [(<>
     <div>
         <h3>Title</h3>
@@ -44,8 +45,12 @@ const CreateArticlePage = ({article}) => {
     </>), (<>
         <div>
             <h3>Content</h3>
-            <div className="text-editor-control-panel">
-
+            <div className="text-editor-control-panel flex row">
+                <button><strong>B</strong></button>
+                <button><em>I</em></button>
+                <button><LinkIcon/></button>
+                <button><ImageIcon/></button>
+                <button>See HTML</button>
             </div>
             <div className="text-editor">
                 <textarea className="full" value={decipherContent()} style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}></textarea>
