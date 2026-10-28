@@ -1,9 +1,8 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form";
 import "./createArticle.css"
-import { ImageIcon, LinkIcon, Plus, PlusCircle, PlusIcon } from "lucide-react";
+import { ImageIcon, LinkIcon } from "lucide-react";
 import { articleContentSchema, articleSchema } from "../store/slices/articlesSlice";
-import { Link } from "react-router-dom";
 
 
 
@@ -11,34 +10,14 @@ const CreateArticlePage = ({article}) => {
     const {
         register,
         handleSubmit,
-        reset,
-        getValues,
-        setValue
+        setValue,
+        getValues
     } = useForm({defaultValues: article ?? articleSchema})
     const [pageNum, setPageNum] = useState(0);
-    const [displayWindow, setDisplayWindow] = useState(false);
-    const [contentBlocks, setContentBlocks] = useState([]);
+    const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
     const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false);
     const [isItalicTextEnabled, setIsItalicTextEnabled] = useState(false);
-    const [currentBlock, setCurrentBlock] = useState(articleContentSchema);
-     const decipherContent = (data) => {
-        let finalString = "";
-        for (let i = 0; i < contentBlocks.length; i++) {
-            Object.entries(contentBlocks[i]).map(([key, val]) => {
-            if (key === "text") {
-                finalString += val;
-            }
-        })
-        }
-    }
-    const saveContentBlock = (block) => {
-        const tempContent = [...getValues("content")].filter((val) => val !== block);
-        setCurrentBlock(block);
-        tempContent.push(block);
-        setValue("content", tempContent);
-        console.log(getValues("content"));
-    }
-    
+    const [beganTyping, setBeganTyping] = useState(false);
     const pages = [(<>
     <div>
         <h3>Title</h3>
@@ -60,16 +39,45 @@ const CreateArticlePage = ({article}) => {
         <div>
             <h3>Content</h3>
             <div className="text-editor-control-panel flex row">
-                <button><strong>B</strong></button>
-                <button><em>I</em></button>
-                <button><LinkIcon/></button>
-                <button><ImageIcon/></button>
+                <button onClick={() => {
+                    const boldBtn = document.getElementById("bold-btn");
+                    if (boldBtn !== null) {
+                        setIsBoldTextEnabled(!isBoldTextEnabled);
+                        boldBtn.classList.toggle('selected');
+                        setBeganTyping(false);
+                    }
+                }} id="bold-btn"><strong>B</strong></button>
+                <button onClick={() => {
+                      const italicBtn = document.getElementById("italic-btn");
+                    if (italicBtn !== null) {
+                        setIsItalicTextEnabled(!isItalicTextEnabled);
+                        italicBtn.classList.toggle('selected');
+                        setBeganTyping(false);
+                    }
+                }} id="italic-btn"><em>I</em></button>
+                <button id="add-link-btn"><LinkIcon/></button>
+                <button id="add-image-btn"><ImageIcon/></button>
                 <button>See HTML</button>
             </div>
             <div className="text-editor">
                 <textarea onChange={(e) => {
-                    saveContentBlock({...articleContentSchema, text: e.currentTarget.value});
-                }} className="full" value={decipherContent(currentBlock)} style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}></textarea>
+                    if (!beganTyping) {
+                        setCurrentBlockIndex(currentBlockIndex++);
+                        const newContentBlock = articleContentSchema;
+                        if (isBoldTextEnabled) {
+                            newContentBlock.format.push("bold");
+                        }
+                        if (isItalicTextEnabled) {
+                            newContentBlock.format.push("italic");
+                        }
+                        setValue("content", [...getValues("content"), newContentBlock]);
+                        setBeganTyping(true);
+                    }
+                }}
+                    {...register(`content.${currentBlockIndex}.text`)}
+                    className="full"
+                    style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}
+                />
             </div>
         </div>
     </>), (<>

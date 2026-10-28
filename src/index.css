@@ -72,6 +72,10 @@ textarea {
 	 z-index: 1000;
 	position: fixed;
 }
+button.selected {
+	background-color: #607264;
+	color: white;
+}
 
 
 
