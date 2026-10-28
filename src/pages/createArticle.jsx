@@ -16,6 +16,9 @@ const CreateArticlePage = ({article}) => {
     const [pageNum, setPageNum] = useState(0);
     const [displayWindow, setDisplayWindow] = useState(false);
     const [contentBlocks, setContentBlocks] = useState({});
+    const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false);
+    const [isItalicTextEnabled, setIsItalicTextEnabled] = useState(false);
+    
      const decipherContent = (data) => {
         let finalString = "";
         Object.entries(contentBlocks).map(([key, val]) => {
