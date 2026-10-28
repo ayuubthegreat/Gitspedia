@@ -76,6 +76,10 @@ button.selected {
 	background-color: #607264;
 	color: white;
 }
+.popup {
+	position: fixed;
+	z-index: 1000;
+}
 
 
 
