@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form";
 import "./createArticle.css"
 import { Plus, PlusCircle, PlusIcon } from "lucide-react";
+import { articleContentSchema, articleSchema } from "../store/slices/articlesSlice";
 
 
 
@@ -10,7 +11,7 @@ const CreateArticlePage = ({article}) => {
         register,
         handleSubmit,
         reset
-    } = useForm({})
+    } = useForm({defaultValues: article ?? articleSchema})
     const [pageNum, setPageNum] = useState(0);
     const [displayWindow, setDisplayWindow] = useState(false);
     const [contentBlocks, setContentBlocks] = useState([]);
@@ -35,58 +36,25 @@ const CreateArticlePage = ({article}) => {
     </>), (<>
         <div>
             <h3>Content</h3>
-            <div className="flex full overflow-scroll">
-                {contentBlocks.length > 0 ? contentBlocks.map((val, i) => {
-                    return (
-                        <>
-                        {Object.entries(val).map(([key, value]) => {
-                            return (
-                                <>
-                                <button onClick={() => {
-                                    const tempBlocks = [...contentBlocks].filter((val, j) => i !== j)
-                                    setContentBlocks(tempBlocks);
-                                }}>Delete</button>
-                                <select value={key} onChange={(e) => {
-                                     const tempBlocks = [...contentBlocks].filter((val, j) => i !== j);
-                                    tempBlocks.push({[e.currentTarget.value]: value});
-                                    setContentBlocks(tempBlocks);
-                                    console.log(tempBlocks);
-                                }}>
-                                    {[...contentTypes].map((contentType) => {
-                                        return (
-                                            <>
-                                            <option value={contentType}>{contentType}</option>
-                                            </>
-                                        )
-                                    })}
-                                </select>
-                                <textarea value={value} className={`${key}-textarea`} onChange={(e) => {
-                                    const tempBlocks = [...contentBlocks].filter((val, j) => i !== j);
-                                    tempBlocks.push({[key]: e.currentTarget.value});
-                                    setContentBlocks(tempBlocks);
-                                    console.log(tempBlocks);
-                                }}></textarea>
-                                </>
-                            )
-                        })}
-                        </>
-                    )
-                }) : (<>
-                <p>No content blocks created.</p>
-                </>)}
+            <div className="text-editor-control-panel">
+
             </div>
-            <button onClick={() => {setContentBlocks([...contentBlocks, {[contentTypes[0]]: ""}])}}><PlusIcon></PlusIcon>Create Content Block</button>
+            <div className="text-editor">
+                <textarea className="full" style={{height:"20vw"}}></textarea>
+            </div>
         </div>
     </>), (<>
     
     </>)]
     
-    
+    const onSubmit = (data) => {
+        console.log(data);
+    }
     return (
         <>
         <div className="full center-text">
             <div>
-                
+                <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="header">
                     <h1>Create Gitspedia Article</h1>
                 </div>
@@ -99,9 +67,11 @@ const CreateArticlePage = ({article}) => {
                     <button onClick={() => {
                         setPageNum(Math.min(pageNum + 1, pages.length - 1))
                     }}>Next</button>
+                    <button>Submit</button>
                 </div>
+                 </form>
             </div>
-
+          
         </div>
         </>
     )

@@ -34,6 +34,7 @@ function App() {
                 <main className="page-shell">
                     <Routes>
                         <Route path='/' element={<HomePage/>}/>
+                        
                         <Route path='/create' element={<CreateArticlePage/>}/>
                     </Routes>
                 </main>

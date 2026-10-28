@@ -72,14 +72,6 @@ textarea {
 	 z-index: 1000;
 	position: fixed;
 }
-.paragraph-textarea {
-	min-height: 160px;
-}
-.link-textarea {
-	min-height: 30px;
-}
-.author-note-textarea {
-	min-height: 80px;
-}
+
 
 

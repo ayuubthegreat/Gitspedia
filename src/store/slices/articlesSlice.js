@@ -4,10 +4,10 @@ import { APICall, Article_SuccessCase, FailedCase, LoadingCase, User_SuccessCase
 
 
 export const articleSchema = {
-    title: "",
-    slug: "",
-    shortDesc: "",
-    longDesc: "",
+    title: "An article",
+    slug: "an-article",
+    short_desc: "An article.",
+    long_desc: "An article.",
     displayImgContent: {},
     content: {},
     infoboxFields: {},
@@ -20,7 +20,7 @@ export const articleContentSchema = {
 }
 export const articleInfoboxSchema = {
     key: "",
-    value: ""
+    value: "",
 }
 export const initialState = {
     articles: [],
