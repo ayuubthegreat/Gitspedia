@@ -18,6 +18,19 @@ const CreateArticlePage = ({article}) => {
     const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false);
     const [isItalicTextEnabled, setIsItalicTextEnabled] = useState(false);
     const [beganTyping, setBeganTyping] = useState(false);
+    const [subsectionIndex, setSubsectionIndex] = useState(0);
+    
+    const addNewContentBlock = () => {
+         setCurrentBlockIndex(currentBlockIndex + 1);
+                        const newContentBlock = articleContentSchema;
+                        if (isBoldTextEnabled) {
+                            newContentBlock.format.push("bold");
+                        }
+                        if (isItalicTextEnabled) {
+                            newContentBlock.format.push("italic");
+                        }
+                        setValue("content", [...getValues("content"), newContentBlock]);
+    }
     const pages = [(<>
     <div>
         <h3>Title</h3>
@@ -45,6 +58,7 @@ const CreateArticlePage = ({article}) => {
                         setIsBoldTextEnabled(!isBoldTextEnabled);
                         boldBtn.classList.toggle('selected');
                         setBeganTyping(false);
+                        addNewContentBlock();
                     }
                 }} id="bold-btn"><strong>B</strong></button>
                 <button onClick={() => {
@@ -53,6 +67,7 @@ const CreateArticlePage = ({article}) => {
                         setIsItalicTextEnabled(!isItalicTextEnabled);
                         italicBtn.classList.toggle('selected');
                         setBeganTyping(false);
+                        addNewContentBlock();
                     }
                 }} id="italic-btn"><em>I</em></button>
                 <button id="add-link-btn"><LinkIcon/></button>
@@ -61,8 +76,12 @@ const CreateArticlePage = ({article}) => {
             </div>
             <div className="text-editor">
                 <textarea onChange={(e) => {
+                    const currentText = e.currentTarget.value.substring(subsectionIndex);
+                    console.log(currentText, subsectionIndex);
+                  
+                    setValue(`content.${currentBlockIndex}`, {...getValues(`content.${currentBlockIndex}`), "text": currentText })
                     if (!beganTyping) {
-                        setCurrentBlockIndex(currentBlockIndex++);
+                        setCurrentBlockIndex(currentBlockIndex + 1);
                         const newContentBlock = articleContentSchema;
                         if (isBoldTextEnabled) {
                             newContentBlock.format.push("bold");
@@ -70,11 +89,12 @@ const CreateArticlePage = ({article}) => {
                         if (isItalicTextEnabled) {
                             newContentBlock.format.push("italic");
                         }
+                        console.log(e.currentTarget.value.length - 1);
+                        setSubsectionIndex(e.currentTarget.value.length);
                         setValue("content", [...getValues("content"), newContentBlock]);
                         setBeganTyping(true);
                     }
                 }}
-                    {...register(`content.${currentBlockIndex}.text`)}
                     className="full"
                     style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}
                 />
