@@ -1,13 +1,19 @@
 import { LinkIcon } from "lucide-react";
 import { useState } from "react";
+import { articleContentSchema } from "../store/slices/articlesSlice";
 
 
 
-const RichTextEditor = ({content = [], setPopUpPosition, setContent}) => {
+const RichTextEditor = ({get, setPopUpPosition, set}) => {
+    // React states
     const [contentBlockIndex, setContentBlockIndex] = useState(0);
+    const [contentAsHTML, setContentAsHTML] = useState(null);
+    const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false);
+    const [isItalicTextEnabled, setIsItalicTextEnabled] = useState(false);
+    
      const translateToHTML = () =>
-        console.log(content);
-    content.map((block, index) => {
+    get('content').map((block, index) => {
+        console.log(block);
         const isBold = block.format?.includes("bold");
         const isItalic = block.format?.includes("italic");
 
@@ -17,34 +23,53 @@ const RichTextEditor = ({content = [], setPopUpPosition, setContent}) => {
 
         return <span key={block.id ?? index}>{text}</span>;
     });
+    const createContentBlock = (add_lParams = {}) => {
+        return {
+            ...articleContentSchema,
+            ...add_lParams,
+        }
+    }
+    const addContentBlock = (parameters) => {
+        const newContentBlock = createContentBlock(parameters);
+        const tempArr = [...get('content'), newContentBlock];
+        setContentBlockIndex(contentBlockIndex + 1);
+        set("content", tempArr);
+        console.log(tempArr, get('content'));
+    }
      
      const updateContent = (text = "") => {
-        const tempContent = [...content];
+        const tempContent = [...get("content")];
         if (tempContent[contentBlockIndex].end_subdivision > text.length) {
             tempContent[contentBlockIndex].end_subdivision = text.length - 1;
         }
         tempContent[contentBlockIndex].text = text.substring(tempContent[contentBlockIndex].start_subdivision, tempContent[contentBlockIndex].end_subdivision);
-        setContent("content", tempContent);
-        console.log(content);
+        setContentAsHTML(translateToHTML());
+        set("content", tempContent);
+        console.log(get("content"));
      }
     return (
         <>
         <div className="rich-text-editor-controls">
-            <button><bold>B</bold></button>
-            <button><em>I</em></button>
+            <button onClick={() => {
+                setIsBoldTextEnabled(!isBoldTextEnabled);
+                if (isBoldTextEnabled) {
+                    addContentBlock({format: ["bold"]});
+                } else {
+                    addContentBlock();
+                }
+            }}><bold>B</bold></button>
+            <button onClick={() => {
+                addContentBlock({format: ["italic"]});
+            }}><em>I</em></button>
             <button><LinkIcon/></button>
         </div>
         <div className="grid">
             <textarea className="rich-text-editor full" onChange={(e) => {
                 updateContent(e.currentTarget.value);
-                const preview_rte = document.getElementById("preview-rte");
-                if (preview_rte !== null) {
-                    preview_rte.innerHTML = `<strong></strong>`;
-                }
 
             }}/>
         <h3>Preview</h3>
-        <div id="preview-rte"></div>
+        <div id="preview-rte">{contentAsHTML}</div>
         </div>
         
         </>
