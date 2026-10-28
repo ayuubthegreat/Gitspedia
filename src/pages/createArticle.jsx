@@ -21,22 +21,23 @@ const CreateArticlePage = ({article}) => {
     const [subsectionIndex, setSubsectionIndex] = useState(0);
     const [contentText, setContentText] = useState("");
 
-    const addNewContentBlock = () => {
-        const blocks = [...getValues("content")];
-        blocks[currentBlockIndex].end_of_subdivision = contentText.length;
-        blocks[currentBlockIndex].text = contentText.substring(blocks[currentBlockIndex].start_of_subdivision, blocks[currentBlockIndex].end_of_subdivision);
-        setCurrentBlockIndex(currentBlockIndex + 1);
-        blocks.push(articleContentSchema);
-        blocks[currentBlockIndex + 1].start_of_subdivision = contentText.length;
-        if (isBoldTextEnabled) {
-            blocks[currentBlockIndex + 1].format.push("bold");
-        }
-        if (isItalicTextEnabled) {
-            blocks[currentBlockIndex + 1].format.push("italic");
-        }
-        setBeganTyping(true);
-        setValue("content", blocks);
-    }
+    const createContentBlock = (start = 0) => ({
+    ...articleContentSchema,
+    format: [],
+    start_of_subdivision: start,
+    end_of_subdivision: -1,
+});
+
+const addNewContentBlock = () => {
+    const blocks = [...getValues("content")];
+    const newBlock = createContentBlock(contentText.length);
+
+    if (isBoldTextEnabled) newBlock.format.push("bold");
+    if (isItalicTextEnabled) newBlock.format.push("italic");
+
+    blocks.push(newBlock);
+    setValue("content", blocks);
+};
     const scanForContentChange = (text) => {
         setContentText(text);
        let blocks = [...getValues("content")];
@@ -60,6 +61,18 @@ const CreateArticlePage = ({article}) => {
        }
        setValue("content", blocks);
        console.log(blocks);
+    }
+    const convertContentToHTML = () => {
+        const blocks = [...getValues("content")];
+        return blocks.map((block, index) => {
+            if (block.format.includes("bold")) {
+                return <p><strong>{block.text}</strong></p>
+            }
+            if (block.format.includes("italic")) {
+                return <p><em>{block.text}</em></p>
+            }
+            return <p>{block.text}</p>
+        });
     }
     const pages = [(<>
     <div>
@@ -113,6 +126,7 @@ const CreateArticlePage = ({article}) => {
                     style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}
                 />
             </div>
+            {convertContentToHTML()}
         </div>
     </>), (<>
     
