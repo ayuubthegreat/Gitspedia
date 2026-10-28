@@ -14,7 +14,15 @@ const CreateArticlePage = ({article}) => {
     } = useForm({defaultValues: article ?? articleSchema})
     const [pageNum, setPageNum] = useState(0);
     const [displayWindow, setDisplayWindow] = useState(false);
-    const [contentBlocks, setContentBlocks] = useState([]);
+    const [contentBlocks, setContentBlocks] = useState({});
+     const decipherContent = (data) => {
+        let finalString = "";
+        Object.entries(contentBlocks).map(([key, val]) => {
+            if (key === "text") {
+                finalString += val;
+            }
+        })
+    }
     const contentTypes = ["paragraph", "author-note", "link"]
     const pages = [(<>
     <div>
@@ -40,7 +48,7 @@ const CreateArticlePage = ({article}) => {
 
             </div>
             <div className="text-editor">
-                <textarea className="full" style={{height:"20vw"}}></textarea>
+                <textarea className="full" value={decipherContent()} style={{ maxHeight: "400px", minHeight: "50px", height:"50vw"}}></textarea>
             </div>
         </div>
     </>), (<>
@@ -50,6 +58,7 @@ const CreateArticlePage = ({article}) => {
     const onSubmit = (data) => {
         console.log(data);
     }
+   
     return (
         <>
         <div className="full center-text">
