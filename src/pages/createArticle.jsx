@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form";
 import "./createArticle.css"
 import { DeleteIcon, ImageIcon, LinkIcon, PlusIcon } from "lucide-react";
-import { articleContentSchema, articleInfoboxSchema, articleSchema, CreateArticle } from "../store/slices/articlesSlice";
+import { articleContentSchema, articleInfoboxSchema, articleSchema, CreateArticle, LoadArticles, UpdateArticle } from "../store/slices/articlesSlice";
 import RichTextEditor from "../components/RichTextEditor";
 import { useDispatch } from "react-redux";
 
@@ -135,8 +135,14 @@ const CreateArticlePage = ({article}) => {
     const onSubmit = async (data) => {
         console.log(data);
         try {
-            await dispatch(CreateArticle({articleData: data})).unwrap();
-            alert("Article created successfully!!")
+            if (article === null) {
+                 await dispatch(CreateArticle({articleData: data})).unwrap();
+                 alert("Article created successfully!!")
+            } else {
+                await dispatch(UpdateArticle({articleData: data})).unwrap();
+                alert(`Article ${article.title} updated successfully!`);
+            }
+            dispatch(LoadArticles());
             reset();
         } catch (error) {
             console.error(error);
@@ -169,7 +175,7 @@ const CreateArticlePage = ({article}) => {
                     <button type="button" onClick={() => {
                         setPageNum(Math.min(pageNum + 1, pages.length - 1))
                     }}>Next</button>
-                    <button type="submit">{article === null ? ""}</button>
+                    <button type="submit">{article === null ? "Submit" : "Edit"}</button>
                 </div>
                  </form>
             </div>
