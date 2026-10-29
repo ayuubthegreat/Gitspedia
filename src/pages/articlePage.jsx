@@ -9,9 +9,9 @@ const ArticlePage = ({article}) => {
         <>
         <div className="article-page">
             <div>
-                <button onClick={() => {
+                {/* <button onClick={() => {
                     navigate(`/edit/${article.id}`);
-                }}>Edit Article</button>
+                }}>Edit Article</button> */}
             </div>
             <div className="grid">
              <div>
