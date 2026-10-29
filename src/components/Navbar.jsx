@@ -22,13 +22,12 @@ const Navbar = () => {
                  <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
         {[...filteredArticles].map((val) => {
             return (
-                <div className='search-result'>
+                <div className='search-result pointer'>
                     <p>{val.title}</p>
+                    <p>{val.short_desc}</p>
                 </div>
             )
         })}
-    
-
             </div>
         </nav>
         </>

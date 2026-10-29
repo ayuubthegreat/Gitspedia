@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { DescriptiveImage } from "../components/DescriptiveImage";
+import DOMPurify from "dompurify";
 
 
 const ArticlePage = ({article}) => {
@@ -17,11 +19,11 @@ const ArticlePage = ({article}) => {
                 <h1>{article.title}</h1>
             </div>
             <div>
-                <p dangerouslySetInnerHTML={{__html: article.main_paragraph}}></p>
+                <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(article.main_paragraph) ?? ""}}></p>
             </div>
             </div>
-            <div>
-                <h2>{article.title}</h2>
+            <div className="flex center-text">
+                <h2 className="center-text">{article.title}</h2>
                 {[...article.displayImageContent].map((val, i) => {
                      const images = import.meta.glob("../assets/*", {
   eager: true,
@@ -32,7 +34,7 @@ const ArticlePage = ({article}) => {
 const img = images[val.key];
                     return (
                         <>
-                        <img width={300} src={img}/>
+                        <img className="img-fit" src={img}/>
                         <p>{val.value}</p>
                         </>
                     )
@@ -42,7 +44,7 @@ const img = images[val.key];
                         <>
                         <div className="flex row">
                            <p style={{fontWeight: "bold"}}>{val.key}</p>
-                        <p>{val.value}</p>  
+                        <p dangerouslySetInnerHTML={{__html: val.value}}></p>  
                         </div>
                        
                         </>

@@ -3,6 +3,7 @@ import SearchBar from '../components/SearchBar';
 import { BASE_DATA } from '../BASE_DATA';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const filterArticles = (text, articles) => {
 
@@ -18,6 +19,7 @@ export const filterArticles = (text, articles) => {
 const HomePage = () => {
     const [filteredArticles, setFilteredArticles] = useState([]);
     const {articles} = useSelector((state) => state.articles);
+    const nav = useNavigate();
 return (
     <>
     <div className='flex header full center-text main-section'>
@@ -28,8 +30,11 @@ return (
         <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
         {[...filteredArticles].map((val) => {
             return (
-                <div className='search-result'>
+                <div className='search-result pointer' onClick={() => {
+                    nav(`/${val.slug}`);
+                }}>
                     <p>{val.title}</p>
+                    <p>{val.short_desc}</p>
                 </div>
             )
         })}

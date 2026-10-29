@@ -5,6 +5,7 @@ import { DeleteIcon, ImageIcon, LinkIcon, PlusIcon } from "lucide-react";
 import { articleContentSchema, articleInfoboxSchema, articleSchema, CreateArticle, LoadArticles, UpdateArticle } from "../store/slices/articlesSlice";
 import RichTextEditor from "../components/RichTextEditor";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -32,6 +33,7 @@ const CreateArticlePage = ({article}) => {
     const [pageNum, setPageNum] = useState(0);
     const [popUpPosition, setPopUpPosition] = useState(null);
     const dispatch = useDispatch();
+    const nav = useNavigate();
     const pages = [(<>
     <div className="overflow-scroll">
     <div>
@@ -141,6 +143,7 @@ const CreateArticlePage = ({article}) => {
             } else {
                 await dispatch(UpdateArticle({articleData: data})).unwrap();
                 alert(`Article ${article.title} updated successfully!`);
+                nav(`/${data.slug}`);
             }
             dispatch(LoadArticles());
             reset();

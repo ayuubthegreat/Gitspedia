@@ -80,6 +80,14 @@ button.selected {
 	position: fixed;
 	z-index: 1000;
 }
+.img-fit {
+	width: 100%;
+	max-width: 400px;
+}
+
+@media screen (max-width: 768px) {
+	
+}
 
 
 
