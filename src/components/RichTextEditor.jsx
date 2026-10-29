@@ -15,7 +15,7 @@ const RichTextEditor = ({get, setPopUpPosition, set, register}) => {
         </div>
         <textarea className="full"  {...register("content")} id="rich-text-editor" onChange={(e) => {
             set("content", e.currentTarget.value);
-            ParseText(e.currentTarget.value);
+            
         }}/>
         </>
     )
