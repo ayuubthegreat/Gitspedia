@@ -20,8 +20,9 @@ export const articleSchema = {
     slug: "an-article",
     short_desc: "An article.",
     long_desc: "An article.",
+    main_paragraph: "",
     displayImageContent: [],
-    content: "",
+    content: [],
     infoboxFields: [],
 }
 

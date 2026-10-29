@@ -22,8 +22,11 @@
 div {
   border: 1px solid black;
 }
-.header {
+.main-header {
   padding: 10vw;
+}
+.header {
+  line-height: 5px;
 }
 .heading-text {
   font-size: 40px;

@@ -25,12 +25,20 @@ const CreateArticlePage = ({article}) => {
         control,
         name: "displayImageContent"
     })
+    const {fields: contentBody, append: appendContentBodyPart, remove: removeContentBodyPart} = useFieldArray({
+        control,
+        name: "content"
+    })
     const [pageNum, setPageNum] = useState(0);
     const [popUpPosition, setPopUpPosition] = useState(null);
     const dispatch = useDispatch();
     const pages = [(<>
     <div>
-        <h3>Title</h3>
+        <div className="header">
+             <h3>Title</h3>
+            <h6>A</h6>
+        </div>
+       
         <input className="full" {...register("title")} placeholder="Title"/>
     </div>
     <div>
@@ -44,6 +52,10 @@ const CreateArticlePage = ({article}) => {
      <div>
         <h3>Long Description</h3>
         <textarea className="full" {...register("long_desc")} placeholder="Long description"/>
+    </div>
+    <div>
+        <h3>Main Paragraph</h3>
+        <textarea className="full" style={{height: 300}} {...register("main_paragraph")} placeholder="Main paragraph"/>
     </div>
     </>), (<>
         <div>
@@ -68,7 +80,23 @@ const CreateArticlePage = ({article}) => {
     </>), (<>
         <div>
             <h3>Content</h3>
-            <RichTextEditor get={getValues} register={register}  set={setValue}/>
+            <div className="flex">
+                {[...getValues("content")].map((val, i) => {
+                    return (
+                        <>
+                        <button type="button" onClick={() => {removeContentBodyPart(i);}}><DeleteIcon/></button>
+                        <label>Header</label>
+                        <input {...register(`content.${i}.key`)}></input>
+                        <label>Body</label>
+                        <textarea style={{height: 300}} {...register(`content.${i}.value`)}/>
+                        </>
+                    )
+                })}
+                <div>
+                    <button type="button" onClick={() => {appendContentBodyPart({...articleInfoboxSchema})}}>Add Content Block</button>
+                </div>
+            </div>
+            
         </div>
         <div>
             <h3>Display Images and Descriptions</h3>
@@ -113,7 +141,7 @@ const CreateArticlePage = ({article}) => {
             <div>
                 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="header">
+                <div className="main-header">
                     <h1>Create Gitspedia Article</h1>
                 </div>
                 {pages[pageNum]}
