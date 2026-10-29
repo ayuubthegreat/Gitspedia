@@ -1,7 +1,23 @@
 import './home.css'
 import SearchBar from '../components/SearchBar';
 import { BASE_DATA } from '../BASE_DATA';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
+export const filterArticles = (text, articles) => {
+
+        if (text === "") {
+            return [];
+        } else {
+            return [...articles].filter((val) => {
+            const title = val.title ?? "";
+            return title.toLowerCase().includes(text.toLowerCase());
+        })
+        }
+    }
 const HomePage = () => {
+    const [filteredArticles, setFilteredArticles] = useState([]);
+    const {articles} = useSelector((state) => state.articles);
 return (
     <>
     <div className='flex header full center-text main-section'>
@@ -9,7 +25,14 @@ return (
         <h3 className='subheading-text'>The official encyclopedia of {BASE_DATA.STUDIO_NAME}</h3>
         <div className=''>
             <p>Search for any article</p>
-        <SearchBar />
+        <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
+        {[...filteredArticles].map((val) => {
+            return (
+                <div className='search-result'>
+                    <p>{val.title}</p>
+                </div>
+            )
+        })}
         </div>
     </div>
     <div className='full'>
