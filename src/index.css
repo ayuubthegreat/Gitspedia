@@ -53,14 +53,18 @@ nav .search-bar {
 }
 .grid {
 	display: grid;
-	grid-template-columns: minmax(0, 2fr) minmax(0, 2fr); 
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); 
 	width: 100%;
 	margin: 20px;
 	padding: 20px;
 	text-align: center;
 }
 .grid div {
+	display: flex;
 	padding: 20px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .overflow-scroll {
  max-height: 300px;
@@ -87,10 +91,18 @@ button.selected {
 }
 button,a {
 	background-color: rgb(226, 225, 222);
-
+	padding: 5px 20px;
+	transition: background-color 0.2s, color 0.2s;
+	border: none;
+	font-size: small;
+}	
+a {
+	text-decoration: none;
+	color: black;
 }
 button:hover,a:hover {
 	background-color: gray;
+	color: white;
 }
 .popup {
 	position: fixed;
@@ -100,8 +112,18 @@ button:hover,a:hover {
 	width: 100%;
 	max-width: 400px;
 }
+.outline {
+	border: 5px solid black;
+	border-radius: 10px;
+}
 .textbox h1 {
 	padding: 0px;
+}
+.info {
+	background-color: coral;
+	padding: 0px 5px;
+	border-radius: 10px;
+	margin-bottom: 30px;
 }
 
 @media screen and (max-width: 768px) {
