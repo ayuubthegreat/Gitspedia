@@ -23,6 +23,10 @@
 * {
 	box-sizing: border-box;
 	font-family: "Crimson Text", serif;
+	
+}
+body {
+	background-color: rgb(218, 207, 188);
 }
 
 button {
@@ -51,7 +55,6 @@ nav .search-bar {
 }
 .grid {
 	display: grid;
-	 grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr);
 }
 .overflow-scroll {
  max-height: 300px;
@@ -86,7 +89,10 @@ button.selected {
 }
 
 @media screen and (max-width: 768px) {
-
+.grid {
+	display: flex;
+	flex-direction: column;
+}
 }
 
 

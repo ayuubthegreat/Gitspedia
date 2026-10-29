@@ -3,7 +3,7 @@ import SearchBar from '../components/SearchBar';
 import { BASE_DATA } from '../BASE_DATA';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const filterArticles = (text, articles) => {
 
@@ -22,11 +22,11 @@ const HomePage = () => {
     const nav = useNavigate();
 return (
     <>
-    <div className='flex header full center-text main-section'>
+    <div className='flex main-header full center-text main-section'>
         <h1 className='heading-text'>Welcome to {BASE_DATA.WEBSITE_NAME}!</h1>
         <h3 className='subheading-text'>The official encyclopedia of {BASE_DATA.STUDIO_NAME}</h3>
-        <div className=''>
-            <p>Search for any article</p>
+        <div className='main-article-search'>
+            <h3>Search for any article</h3>
         <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
         {[...filteredArticles].map((val) => {
             return (
@@ -40,8 +40,15 @@ return (
         })}
         </div>
     </div>
-    <div className='full'>
-        <h1 className='heading-text'>Recent Articles</h1>
+    <div className='grid full'>
+        <div className='flex center-text middle'>
+            <p>Want to write for us?</p>
+            <button>Submit application</button>
+        </div>
+        <div className='flex center-text middle'>
+            <p>Visit our studio website!</p>
+            <button><Link to={"https://www.crescentmoonstudios.com"}>Go to Crescent Moon Studio's webpage</Link></button>
+        </div>
     </div>
     </>
 )
