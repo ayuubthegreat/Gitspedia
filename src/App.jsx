@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import Footer from './components/footer.jsx'
 import CreateArticlePage from './pages/createArticle.jsx'
 import PageNotFound from './pages/pageNotFound.jsx'
+import ArticlePage from './pages/articlePage.jsx'
 
 function App() {
     const {articles, filteredArticle} = useSelector((state) => state.articles)
@@ -37,7 +38,10 @@ function App() {
                         <Route path='/' element={<HomePage/>}/>
                         {articles.map((val) => {
                             return (
-                                <Route path={`/${val.slug}`} element/>
+                                <> 
+                                <Route path={`/${val.slug}`} element={<ArticlePage article={val}/>}/>
+                                <Route path={`/edit/${val.id}`} element={<CreateArticlePage article={val}/>}/>
+                                </>
                             )
                         })}
                         <Route path='/create' element={<CreateArticlePage/>}/>

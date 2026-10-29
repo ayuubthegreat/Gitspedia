@@ -169,7 +169,7 @@ const CreateArticlePage = ({article}) => {
                     <button type="button" onClick={() => {
                         setPageNum(Math.min(pageNum + 1, pages.length - 1))
                     }}>Next</button>
-                    <button type="submit">Submit</button>
+                    <button type="submit">{article === null ? ""}</button>
                 </div>
                  </form>
             </div>
