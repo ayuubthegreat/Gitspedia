@@ -20,9 +20,9 @@ export const articleSchema = {
     slug: "an-article",
     short_desc: "An article.",
     long_desc: "An article.",
-    displayImgContent: [],
+    displayImageContent: [],
     content: "",
-    infoboxFields: {},
+    infoboxFields: [],
 }
 
 export const initialState = {

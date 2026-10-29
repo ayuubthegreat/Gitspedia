@@ -7,13 +7,12 @@ import { ParseText } from "./TextParser";
 
 const RichTextEditor = ({get, setPopUpPosition, set, register}) => {
     // React states
-
     return (
         <>
         <div id="rich-text-controls">
             <button>Documentation</button>
         </div>
-        <textarea className="full"  {...register("content")} id="rich-text-editor" onChange={(e) => {
+        <textarea style={{height: "300px"}} className="full"  {...register("content")} id="rich-text-editor" onChange={(e) => {
             set("content", e.currentTarget.value);
             
         }}/>

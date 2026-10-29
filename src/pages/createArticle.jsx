@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import "./createArticle.css"
-import { ImageIcon, LinkIcon } from "lucide-react";
-import { articleContentSchema, articleSchema } from "../store/slices/articlesSlice";
+import { DeleteIcon, ImageIcon, LinkIcon, PlusIcon } from "lucide-react";
+import { articleContentSchema, articleInfoboxSchema, articleSchema } from "../store/slices/articlesSlice";
 import RichTextEditor from "../components/RichTextEditor";
 
 
@@ -12,10 +12,20 @@ const CreateArticlePage = ({article}) => {
         register,
         handleSubmit,
         setValue,
-        getValues
+        getValues,
+        control
     } = useForm({defaultValues: article ?? articleSchema})
+    const { fields: infoboxFields, append, remove } = useFieldArray({
+        control,
+        name: "infoboxFields"
+    })
+    const {fields: displayImageContent, append: appendImgContent, remove: removeImgContent} = useFieldArray({
+        control,
+        name: "displayImageContent"
+    })
     const [pageNum, setPageNum] = useState(0);
     const [popUpPosition, setPopUpPosition] = useState(null);
+    
     const pages = [(<>
     <div>
         <h3>Title</h3>
@@ -35,11 +45,46 @@ const CreateArticlePage = ({article}) => {
     </div>
     </>), (<>
         <div>
+            <h3>Infobox</h3>
+            <div className="full">
+                {infoboxFields.map((field, i) => {
+                    return (
+                        <div className="flex" key={field.id}>
+                        <button type="button" onClick={() => remove(i)}><DeleteIcon/></button>
+                        <label>Key</label>
+                        <input {...register(`infoboxFields.${i}.key`)} placeholder="Enter key...."/>
+                        <label>Value</label>
+                        <input {...register(`infoboxFields.${i}.value`)} placeholder="Enter value...."/>
+                        </div>
+                    )
+                })}
+                <button type="button" onClick={() => append({...articleInfoboxSchema})}>
+                    <PlusIcon/>Add Infobox Value
+                </button>
+            </div>
+        </div>
+    </>), (<>
+        <div>
             <h3>Content</h3>
             <RichTextEditor get={getValues} register={register}  set={setValue}/>
         </div>
-    </>), (<>
-    
+        <div>
+            <h3>Display Images and Descriptions</h3>
+            {displayImageContent.map((imgContent, i) => {
+                return (
+                    <>
+                    <div className="flex"> 
+                        <button type="button" onClick={() => removeImgContent(i)}><DeleteIcon/></button>
+                        <label>Image Link (must be relative)</label>
+                        <input {...register(`displayImageContent.${i}.key`)} placeholder="Enter image link..."/>
+                        <label>Image description</label>
+                        <input {...register(`displayImageContent.${i}.value`)} placeholder="Enter image description..."/>
+                    </div>
+                    </>
+                )
+            })}
+            <button onClick={() => appendImgContent({...articleInfoboxSchema})}>Add Image Content</button>
+        </div>
     </>)]
     
     const onSubmit = (data) => {
