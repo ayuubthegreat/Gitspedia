@@ -1,6 +1,7 @@
 import { ImageIcon, LinkIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { articleContentSchema } from "../store/slices/articlesSlice";
+import { ParseText } from "./TextParser";
 
 
 
@@ -14,6 +15,7 @@ const RichTextEditor = ({get, setPopUpPosition, set, register}) => {
         </div>
         <textarea className="full"  {...register("content")} id="rich-text-editor" onChange={(e) => {
             set("content", e.currentTarget.value);
+            ParseText(e.currentTarget.value);
         }}/>
         </>
     )
