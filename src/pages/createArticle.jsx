@@ -33,31 +33,42 @@ const CreateArticlePage = ({article}) => {
     const [popUpPosition, setPopUpPosition] = useState(null);
     const dispatch = useDispatch();
     const pages = [(<>
+    <div className="overflow-scroll">
     <div>
         <div className="header">
              <h3>Title</h3>
-            <h6>A</h6>
+            <p>Title of the article</p>
         </div>
        
         <input className="full" {...register("title")} placeholder="Title"/>
     </div>
     <div>
-        <h3>Slug</h3>
+        <div className="header">
+           <h3>Slug</h3>
+        <p>Phrase following the main link of Gitspedia (ex. www.gitspedia.org/<strong>an-article</strong>)</p> 
+        </div>
+        
         <input className="full" {...register("slug")} placeholder="Slug"/>
     </div>
     <div>
-        <h3>Short Description</h3>
+        <div className="header">
+            <h3>Short Description</h3>
+        <p>Will be shown in short article card in the Articles page</p>
+        </div>
+        
         <input className="full" {...register("short_desc")} placeholder="Short description"/>
     </div>
-     <div>
-        <h3>Long Description</h3>
-        <textarea className="full" {...register("long_desc")} placeholder="Long description"/>
-    </div>
     <div>
-        <h3>Main Paragraph</h3>
+        <div className="header">
+         <h3>Main Paragraph*</h3>
+        <p>Will be shown first in article. In mobile and tablet displays, the infobox will go under this paragraph
+        </p>
+        </div>
         <textarea className="full" style={{height: 300}} {...register("main_paragraph")} placeholder="Main paragraph"/>
     </div>
+    </div>
     </>), (<>
+        <div className="overflow-scroll">
         <div>
             <h3>Infobox</h3>
             <div className="full">
@@ -77,11 +88,14 @@ const CreateArticlePage = ({article}) => {
                 </button>
             </div>
         </div>
+        </div>
     </>), (<>
+    <div className="overflow-scroll">
         <div>
-            <h3>Content</h3>
+            <h3>Content*</h3>
+            <p>Paragraphs of the article</p>
             <div className="flex">
-                {[...getValues("content")].map((val, i) => {
+                {contentBody.map((val, i) => {
                     return (
                         <>
                         <button type="button" onClick={() => {removeContentBodyPart(i);}}><DeleteIcon/></button>
@@ -115,6 +129,7 @@ const CreateArticlePage = ({article}) => {
             })}
             <button type="button" onClick={() => appendImgContent({...articleInfoboxSchema})}>Add Image Content</button>
         </div>
+        </div>
     </>)]
     
     const onSubmit = async (data) => {
@@ -143,6 +158,7 @@ const CreateArticlePage = ({article}) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="main-header">
                     <h1>Create Gitspedia Article</h1>
+                    <p>* = Must be written in HTML</p>
                 </div>
                 {pages[pageNum]}
                 <div className="page-control-panel">

@@ -7,6 +7,7 @@ import HomePage from './pages/home.jsx'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/footer.jsx'
 import CreateArticlePage from './pages/createArticle.jsx'
+import PageNotFound from './pages/pageNotFound.jsx'
 
 function App() {
     const {articles, filteredArticle} = useSelector((state) => state.articles)
@@ -34,8 +35,13 @@ function App() {
                 <main className="page-shell">
                     <Routes>
                         <Route path='/' element={<HomePage/>}/>
-                        
+                        {articles.map((val) => {
+                            return (
+                                <Route path={`/${val.slug}`} element/>
+                            )
+                        })}
                         <Route path='/create' element={<CreateArticlePage/>}/>
+                        <Route path='*' element={<PageNotFound/>}/>
                     </Routes>
                 </main>
                 <Footer/>
