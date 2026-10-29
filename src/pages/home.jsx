@@ -4,6 +4,7 @@ import { BASE_DATA } from '../BASE_DATA';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { Grid } from '../components/Grid';
 
 export const filterArticles = (text, articles) => {
 
@@ -40,16 +41,24 @@ return (
         })}
         </div>
     </div>
-    <div className='grid full'>
-        <div className='flex center-text middle'>
-            <p>Want to write for us?</p>
+     <Grid gridWidth={"1fr"}>
+           <div className=''>
+            <div className='textbox'>
+                <h2>Want to write for us?</h2>
+                <p>The best time to apply is all the time!</p>
+                </div>
+            
             <button>Submit application</button>
         </div>
-        <div className='flex center-text middle'>
-            <p>Visit our studio website!</p>
+        <div className=''>
+            <div className='textbox'>
+            <h2>Visit our studio website!</h2>
+            <p>It's the source with the most!</p>
+            </div>
+            
             <button><Link to={"https://www.crescentmoonstudios.com"}>Go to Crescent Moon Studio's webpage</Link></button>
         </div>
-    </div>
+     </Grid>
     </>
 )
 }

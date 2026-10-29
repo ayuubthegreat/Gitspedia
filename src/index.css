@@ -29,9 +29,7 @@ body {
 	background-color: rgb(218, 207, 188);
 }
 
-button {
-	padding: 5px 20px;
-}
+
 input {
 	padding: 3px 20px;
 	margin-right: 20px;
@@ -55,6 +53,14 @@ nav .search-bar {
 }
 .grid {
 	display: grid;
+	grid-template-columns: minmax(0, 2fr) minmax(0, 2fr); 
+	width: 100%;
+	margin: 20px;
+	padding: 20px;
+	text-align: center;
+}
+.grid div {
+	padding: 20px;
 }
 .overflow-scroll {
  max-height: 300px;
@@ -79,6 +85,13 @@ button.selected {
 	background-color: #607264;
 	color: white;
 }
+button,a {
+	background-color: rgb(226, 225, 222);
+
+}
+button:hover,a:hover {
+	background-color: gray;
+}
 .popup {
 	position: fixed;
 	z-index: 1000;
@@ -87,12 +100,15 @@ button.selected {
 	width: 100%;
 	max-width: 400px;
 }
+.textbox h1 {
+	padding: 0px;
+}
 
 @media screen and (max-width: 768px) {
-.grid {
+ .grid {
 	display: flex;
 	flex-direction: column;
-}
+ }
 }
 
 
