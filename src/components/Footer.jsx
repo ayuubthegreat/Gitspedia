@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { BASE_DATA } from "../BASE_DATA";
-import './footer.css'
+import './Footer.css'
 import cmsLogo from "../assets/cmsLogo.png"
 
 

@@ -44,13 +44,24 @@ const img = images[val.key];
                         <>
                         <div className="flex row">
                            <p style={{fontWeight: "bold"}}>{val.key}</p>
-                        <p dangerouslySetInnerHTML={{__html: val.value}}></p>  
+                        <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(val.value) ?? ""}}></p>  
                         </div>
                        
                         </>
                     )
                 })}
             </div>
+            
+            </div>
+            <div>
+               {[...article.content].map((val) => {
+                return (
+                    <>
+                    <h2>{val.key}</h2>
+                    <p>{val.value}</p>
+                    </>
+                )
+               })}
             </div>
             
            
