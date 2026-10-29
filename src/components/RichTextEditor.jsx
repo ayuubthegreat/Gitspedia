@@ -10,7 +10,7 @@ const RichTextEditor = ({get, setPopUpPosition, set, register}) => {
     return (
         <>
         <div id="rich-text-controls">
-            <button>Documentation</button>
+            <button type="button">Documentation</button>
         </div>
         <textarea style={{height: "300px"}} className="full"  {...register("content")} id="rich-text-editor" onChange={(e) => {
             set("content", e.currentTarget.value);

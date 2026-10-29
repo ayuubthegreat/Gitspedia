@@ -2,8 +2,9 @@ import { useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form";
 import "./createArticle.css"
 import { DeleteIcon, ImageIcon, LinkIcon, PlusIcon } from "lucide-react";
-import { articleContentSchema, articleInfoboxSchema, articleSchema } from "../store/slices/articlesSlice";
+import { articleContentSchema, articleInfoboxSchema, articleSchema, CreateArticle } from "../store/slices/articlesSlice";
 import RichTextEditor from "../components/RichTextEditor";
+import { useDispatch } from "react-redux";
 
 
 
@@ -13,7 +14,8 @@ const CreateArticlePage = ({article}) => {
         handleSubmit,
         setValue,
         getValues,
-        control
+        control,
+        reset
     } = useForm({defaultValues: article ?? articleSchema})
     const { fields: infoboxFields, append, remove } = useFieldArray({
         control,
@@ -25,7 +27,7 @@ const CreateArticlePage = ({article}) => {
     })
     const [pageNum, setPageNum] = useState(0);
     const [popUpPosition, setPopUpPosition] = useState(null);
-    
+    const dispatch = useDispatch();
     const pages = [(<>
     <div>
         <h3>Title</h3>
@@ -83,20 +85,29 @@ const CreateArticlePage = ({article}) => {
                     </>
                 )
             })}
-            <button onClick={() => appendImgContent({...articleInfoboxSchema})}>Add Image Content</button>
+            <button type="button" onClick={() => appendImgContent({...articleInfoboxSchema})}>Add Image Content</button>
         </div>
     </>)]
     
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
+        try {
+            await dispatch(CreateArticle({articleData: data})).unwrap();
+            alert("Article created successfully!!")
+            reset();
+        } catch (error) {
+            console.error(error);
+            alert("Couldn't create article. " + error);
+        }
+
     }
    
     return (
         <>
         {popUpPosition && (<div className="popup" style={{left: popUpPosition.x, right: popUpPosition.y + 8}}>
-                    <button>X</button>
+                    <button type="button">X</button>
                     {renderPopupGraphics()}
-                    <button onClick={() => {onPopupSubmit();}}>Submit</button>
+                    <button type="button" onClick={() => {onPopupSubmit();}}>Submit</button>
                 </div>)}
         <div className="full center-text">
             <div>
@@ -107,14 +118,14 @@ const CreateArticlePage = ({article}) => {
                 </div>
                 {pages[pageNum]}
                 <div className="page-control-panel">
-                    <button onClick={() => {
+                    <button type="button" onClick={() => {
                         setPageNum(Math.max(0, pageNum - 1));
                     }}>Previous</button>
                     <p>{pageNum + 1} of {pages.length}</p>
-                    <button onClick={() => {
+                    <button type="button" onClick={() => {
                         setPageNum(Math.min(pageNum + 1, pages.length - 1))
                     }}>Next</button>
-                    <button>Submit</button>
+                    <button type="submit">Submit</button>
                 </div>
                  </form>
             </div>
