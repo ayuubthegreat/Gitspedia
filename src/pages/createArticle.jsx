@@ -36,7 +36,7 @@ const CreateArticlePage = ({article}) => {
     </>), (<>
         <div>
             <h3>Content</h3>
-            <RichTextEditor get={getValues}  set={setValue}/>
+            <RichTextEditor get={getValues} register={register}  set={setValue}/>
         </div>
     </>), (<>
     

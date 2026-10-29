@@ -21,7 +21,7 @@ export const articleSchema = {
     short_desc: "An article.",
     long_desc: "An article.",
     displayImgContent: [],
-    content: [articleContentSchema],
+    content: "",
     infoboxFields: {},
 }
 
