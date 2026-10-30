@@ -10,6 +10,7 @@ const Navbar = () => {
     const nav = useNavigate();
     const {articles} = useSelector((state) => state.articles);
     const [filteredArticles, setFilteredArticles] = useState([]);
+    const [isEmpty, setIsEmpty] = useState(true);
     return (
         <>
         <nav>
@@ -22,17 +23,21 @@ const Navbar = () => {
 
             
             <div className="nav-search">
-                 <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
+                 <SearchBar onChange={(e) => {
+                    setIsEmpty(e.currentTarget.value === "");
+                    setFilteredArticles(filterArticles(e.currentTarget.value, articles));
+                    }} />
         <div className="search-result-box">
-           {filteredArticles.length === 0 ? (<>
+            {!isEmpty && (<>
+            {filteredArticles.length === 0 ? (<>
            <div className="search-result">
              <p>No articles found.</p>
            </div>
-           
            </>) : (<>
                 {[...filteredArticles].map((val) => {
             return (
                 <div className='search-result pointer' onClick={() => {
+                    setIsEmpty(true);
                     nav(`/${val.slug}`);
                 }}>
                     <p>{val.title}</p>
@@ -41,6 +46,8 @@ const Navbar = () => {
             )
         })}
            </>)} 
+            </>)}
+           
         </div>
             </div>
             <div className="nav-links flex row">

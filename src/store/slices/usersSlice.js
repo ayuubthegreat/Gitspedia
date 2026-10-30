@@ -11,6 +11,10 @@ export const userSchema = z.object({
     email: z.email(),
     password: z.string().min(5).max(100),
 })
+export const loginSchema = z.object({
+    username: z.string().min(5, "Username must be 5 characters long...").max(100, "Username character limit exceeded"),
+    password: z.string().min(5).max(100),
+})
 export const initialState = {
     user: null,
     error: null,

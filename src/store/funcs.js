@@ -31,6 +31,7 @@ export const User_SuccessCase = (state, action) => {
     console.log("User success case triggered")
     state.loading = false
     state.user = action.payload.data
+    console.log(action.payload.message);
     localStorage.setItem("user", state.user.id.toString())
     console.log("User successfully updated:", state.user)
 }
