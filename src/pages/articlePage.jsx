@@ -14,13 +14,23 @@ const ArticlePage = ({article}) => {
                     navigate(`/edit/${article.id}`);
                 }}>Edit Article</button> */}
             </div>
-            <div className="grid">
+            <div className="opening-article-content">
              <div className="page">
                  <div>
                 <h1>{article.title}</h1>
             </div>
             <div>
                 <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(article.main_paragraph) ?? ""}}></p>
+            </div>
+             <div className="page large-screen-content">
+               {[...article.content].map((val) => {
+                return (
+                    <>
+                    <h2>{val.key}</h2>
+                    <p>{val.value}</p>
+                    </>
+                )
+               })}
             </div>
             </div>
             <div className="flex center-text page infobox">
@@ -53,7 +63,7 @@ const img = images[val.key];
                 })}
             </div>
             </div>
-            <div className="page">
+            <div className="page small-screen-content">
                {[...article.content].map((val) => {
                 return (
                     <>
