@@ -11,6 +11,7 @@ import PageNotFound from './pages/pageNotFound.jsx'
 import ArticlePage from './pages/articlePage.jsx'
 import LoginPage from './pages/loginPage.jsx'
 import RegisterPage from './pages/registerForm.jsx'
+import { LoginUserByID } from './store/slices/usersSlice.js'
 
 function App() {
     const {articles, filteredArticle} = useSelector((state) => state.articles)
@@ -18,6 +19,7 @@ function App() {
 
     const dispatch = useDispatch();
     useEffect(() => {
+        
         async function fetchData() {
               await dispatch(LoadArticles()).unwrap().then((response) => {
                 const firstArticle = response.data?.[0]
@@ -27,6 +29,11 @@ function App() {
               }).catch((error) => {
             console.error("Failed to load articles:", error)
         })
+         if (localStorage.getItem("user") !== null) {
+                const userID = localStorage.getItem("user");
+                console.log(userID);
+                await dispatch(LoginUserByID(userID)).unwrap();
+            }
         }
         fetchData();
          console.log(`${articles.length} articles loaded.`);

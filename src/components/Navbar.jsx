@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
     const nav = useNavigate();
     const {articles} = useSelector((state) => state.articles);
+    const {user} = useSelector((state) => state.user);
     const [filteredArticles, setFilteredArticles] = useState([]);
     const [isEmpty, setIsEmpty] = useState(true);
     return (
@@ -20,8 +21,6 @@ const Navbar = () => {
                 <img className="nav-title-img" width={200} src={gitspediaLogo}></img>
             </div>
             <div className="flex row middle">
-
-            
             <div className="nav-search">
                  <SearchBar onChange={(e) => {
                     setIsEmpty(e.currentTarget.value === "");
@@ -53,6 +52,14 @@ const Navbar = () => {
             <div className="nav-links flex row">
                 <Link to={"/login"}>Login</Link>
             <Link to={"/register"}>Apply</Link> 
+            </div>
+            <div>
+                {user && (<>
+                <div>
+                    <h3>Welcome, {user.username}!</h3>
+                    <button>Logout</button>
+                </div>
+                </>)}
             </div>
            </div>
         </nav>

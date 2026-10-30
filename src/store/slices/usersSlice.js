@@ -55,6 +55,16 @@ export const GetUsers = createAsyncThunk(
         }
     }
 )
+export const LoginUserByID = createAsyncThunk(
+    "user/loginByID",
+    async(userID, {rejectWithValue}) => {
+        try {
+            const response = await APICall({endpoint: `auth/user/${userID}`, method: "GET"});
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
 
 
 export const UsersSlice = createSlice({
@@ -80,6 +90,10 @@ export const UsersSlice = createSlice({
             console.log("Found users: ", action.payload.data);
         })
         .addCase(GetUsers.rejected, FailedCase)
+        builder
+        .addCase(LoginUserByID.pending, LoadingCase)
+        .addCase(LoginUserByID.fulfilled, User_SuccessCase)
+        .addCase(LoginUserByID.rejected, FailedCase)
     }
 })
 export default UsersSlice.reducer
