@@ -1,0 +1,18 @@
+.page {
+    border: rgb(196, 196, 166);
+    background-color: white;
+}
+.article-page {
+    display: flex;
+    flex-direction: column;
+}
+.infobox {
+    border: 2px solid black;
+    max-width: 400px;
+    align-items: right;
+}
+@media screen and (max-width: 768px) {
+    .infobox {
+        max-width: 100%;
+    }
+}

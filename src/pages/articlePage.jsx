@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { DescriptiveImage } from "../components/DescriptiveImage";
 import DOMPurify from "dompurify";
+import "./articlePage.css"
 
 
 const ArticlePage = ({article}) => {
@@ -14,7 +15,7 @@ const ArticlePage = ({article}) => {
                 }}>Edit Article</button> */}
             </div>
             <div className="grid">
-             <div>
+             <div className="page">
                  <div>
                 <h1>{article.title}</h1>
             </div>
@@ -22,7 +23,7 @@ const ArticlePage = ({article}) => {
                 <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(article.main_paragraph) ?? ""}}></p>
             </div>
             </div>
-            <div className="flex center-text">
+            <div className="flex center-text page infobox">
                 <h2 className="center-text">{article.title}</h2>
                 {[...article.displayImageContent].map((val, i) => {
                      const images = import.meta.glob("../assets/*", {
@@ -51,14 +52,13 @@ const img = images[val.key];
                     )
                 })}
             </div>
-            
             </div>
-            <div>
+            <div className="page">
                {[...article.content].map((val) => {
                 return (
                     <>
-                    <h2>{val.key}</h2>
-                    <p>{val.value}</p>
+                    <h2 style={{marginLeft: "50px"}}>{val.key}</h2>
+                    <p style={{marginLeft: "80px"}}>{val.value}</p>
                     </>
                 )
                })}
