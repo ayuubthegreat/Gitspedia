@@ -1,19 +1,29 @@
 import { useForm } from "react-hook-form";
 import { BASE_DATA } from "../BASE_DATA";
 import "./registerForm.css"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterUser, userSchema } from "../store/slices/usersSlice";
+import { useDispatch } from "react-redux";
 
 
 const RegisterPage = () => {
     const {
         register,
-        setValue,
-        getValues,
         reset,
-        control,
-        handleSubmit
-    } = useForm();
-    const onSubmit = (data) => {
-
+        handleSubmit,
+        formState: {errors},
+    } = useForm({
+        resolver: zodResolver(userSchema)
+    });
+    const dispatch = useDispatch();
+    const onSubmit = async (data) => {
+        data.role = "PENDING-APPROVAL";
+        try {
+            await dispatch(RegisterUser({loginData: data})).unwrap();
+            reset();
+        } catch (error) {
+            alert(error.message);
+        }
     }
     return (
         <>
@@ -24,15 +34,24 @@ const RegisterPage = () => {
             </div>
             <form action={"/submit-profile"} onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex row register-section">
+                    <label>Username</label>
+                    <input {...register("username")} placeholder="Enter username..." type="text"></input>
+                    {errors.username && <p className="info uh-oh">{errors.username.message}</p>}
+                </div>
+                <div className="flex row register-section">
                     <label>Name</label>
-                    <input placeholder="First name" type="text"></input>
-                    <input placeholder="Last name" type="text"></input>
+                    <input {...register("firstName")} placeholder="Enter your first name...." type="text"></input>
+                    {errors.firstName && <p className="info uh-oh" role="alert">{errors.firstName.message}</p>}
+                    <input {...register("lastName")} placeholder="Enter your last name...." type="text"></input>
+                    {errors.lastName && <p className="info uh-oh" role="alert">{errors.lastName.message}</p>}
                 </div>
                 <div className="flex row register-section">
                     <label>Email</label>
-                    <input placeholder="Email" type="email"></input>
+                    <input {...register("email")} placeholder="Enter email...." type="email"></input>
+                    {errors.email && <p className="info uh-oh" role="alert">{errors.email.message}</p>}
                      <label>Password</label>
-                    <input placeholder="Enter password...." type="password"/>
+                    <input {...register("password")} placeholder="Enter password...." type="password"/>
+                    {errors.password && <p className="info uh-oh"  role="alert">{errors.password.message}</p>}
                 </div>
                 <div className="flex register-section">
                    <label>Why do you want to write for {BASE_DATA.WEBSITE_NAME}? <br></br> <i>Note: Please write in a minimum of 100 words. This is so we can fully determine why you want to write for us. Your data will be used to improve our writing environment, as per the Gitspedia terms of service.</i></label>
