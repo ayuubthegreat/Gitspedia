@@ -1,6 +1,8 @@
 .page {
     border: rgb(196, 196, 166);
     background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .article-page {
     display: flex;

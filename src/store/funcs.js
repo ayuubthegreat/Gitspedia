@@ -25,16 +25,12 @@ export const LoadingCase = (state) => {
 export const Article_SuccessCase = (state, action) => {
     state.loading = false
     state.articles = action.payload.data
-    state.successMessage = action.payload.message
     console.log(action.payload.data);
-    state.success = true;
 }
 export const User_SuccessCase = (state, action) => {
     console.log("User success case triggered")
     state.loading = false
     state.user = action.payload.data
-    state.successMessage = action.payload.message
-    state.success = true;
     localStorage.setItem("user", state.user.id.toString())
     console.log("User successfully updated:", state.user)
 }

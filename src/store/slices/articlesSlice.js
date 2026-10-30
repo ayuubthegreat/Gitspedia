@@ -29,9 +29,6 @@ export const articleSchema = {
 export const initialState = {
     articles: [],
     filteredArticle: {},
-    user: null,
-    success: false,
-    successMessage: "",
     error: null,
 }
 
