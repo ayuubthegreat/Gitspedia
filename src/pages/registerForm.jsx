@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { BASE_DATA } from "../BASE_DATA";
 import "./registerForm.css"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterUser, userSchema } from "../store/slices/usersSlice";
+import { GetUsers, RegisterUser, userSchema } from "../store/slices/usersSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -17,12 +17,15 @@ const RegisterPage = () => {
     });
     const dispatch = useDispatch();
     const onSubmit = async (data) => {
-        data.role = "PENDING-APPROVAL";
+        data.role = "PENDING_APPROVAL";
+        data.websiteName = "Gitspedia"
+        console.log(data);
         try {
             await dispatch(RegisterUser({loginData: data})).unwrap();
+            await dispatch(GetUsers()).unwrap();
             reset();
         } catch (error) {
-            alert(error.message);
+            alert(error);
         }
     }
     return (

@@ -40,6 +40,17 @@ export const RegisterUser = createAsyncThunk(
         }
     }
 )
+export const GetUsers = createAsyncThunk(
+    "user/get",
+    async (_, {rejectWithValue}) => {
+        try {
+            const response = await APICall({endpoint: `auth/users/gitspedia`, method: "POST",});
+            return response
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
 
 
 export const UsersSlice = createSlice({
@@ -59,6 +70,12 @@ export const UsersSlice = createSlice({
         .addCase(RegisterUser.pending, LoadingCase)
         .addCase(RegisterUser.fulfilled, User_SuccessCase)
         .addCase(RegisterUser.rejected, FailedCase)
+        builder
+        .addCase(GetUsers.pending, LoadingCase)
+        .addCase(GetUsers.fulfilled, (state, action) => {
+            console.log("Found users: ", action.payload.data);
+        })
+        .addCase(GetUsers.rejected, FailedCase)
     }
 })
 export default UsersSlice.reducer
