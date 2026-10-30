@@ -5,6 +5,7 @@ import { loginSchema, userSchema } from "../store/slices/usersSlice";
 import "./loginPage.css"
 import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
+import { useState } from "react";
 
 
 const LoginPage = () => {
@@ -16,6 +17,7 @@ const LoginPage = () => {
     } = useForm({
         resolver: zodResolver(loginSchema)
     });
+    const [showPassword, setShowPassword] = useState(false);
     return (
         <>
         <div className="login-page outline flex center-text">
@@ -30,8 +32,8 @@ const LoginPage = () => {
                 {errors.username && <p className="info uh-oh">{errors.username.message}</p>}
                   <label>Password</label>
                   <div className="flex row">
-                    <input type="password" placeholder="Enter password...." {...register("password")}/>
-                    <button className="flex middle row"><Eye></Eye>See Password</button>
+                    <input type={`${showPassword ? "text" : "password"}`} placeholder="Enter password...." {...register("password")}/>
+                    <button type="button" onClick={() => {setShowPassword(!showPassword);}} className="flex middle row"><Eye></Eye>{showPassword ? "Hide Password" : "Show Password"}</button>
                   </div>
                 
                  {errors.password && <p className="info uh-oh">{errors.password.message}</p>}
