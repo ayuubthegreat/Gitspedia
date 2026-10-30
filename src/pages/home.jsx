@@ -7,7 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Grid } from '../components/Grid';
 
 export const filterArticles = (text, articles) => {
-
         if (text === "") {
             return [];
         } else {

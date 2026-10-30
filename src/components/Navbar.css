@@ -16,7 +16,14 @@ nav {
     padding: 5px 10px;
 }
 
-@media (max-width: 650px) {
+.nav-links {
+    gap: 20px;
+}
+.nav-search {
+    padding: 5px;
+    background-color: aliceblue;
+}
+@media (max-width: 768px) {
     .nav-search {
         display: none;
     }

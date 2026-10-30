@@ -1,7 +1,7 @@
 import gitspediaLogo from "../assets/gitspediaLogo.png";
 import SearchBar from "./SearchBar";
 import './Navbar.css'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { filterArticles } from "../pages/home";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -18,10 +18,19 @@ const Navbar = () => {
             }} >
                 <img className="nav-title-img" width={200} src={gitspediaLogo}></img>
             </div>
+            <div className="flex row middle">
+
+            
             <div className="nav-search">
                  <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
         <div className="search-result-box">
-            {[...filteredArticles].map((val) => {
+           {filteredArticles.length === 0 ? (<>
+           <div className="search-result">
+             <p>No articles found.</p>
+           </div>
+           
+           </>) : (<>
+                {[...filteredArticles].map((val) => {
             return (
                 <div className='search-result pointer' onClick={() => {
                     nav(`/${val.slug}`);
@@ -30,9 +39,15 @@ const Navbar = () => {
                     <p>{val.short_desc}</p>
                 </div>
             )
-        })} 
+        })}
+           </>)} 
         </div>
             </div>
+            <div className="nav-links flex row">
+                <Link to={"/login"}>Login</Link>
+            <Link to={"/register"}>Apply</Link> 
+            </div>
+           </div>
         </nav>
         </>
     )
