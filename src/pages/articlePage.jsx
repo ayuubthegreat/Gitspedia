@@ -8,7 +8,7 @@ const ArticlePage = ({article}) => {
     const navigate = useNavigate();
     return (
         <>
-        <div className="article-page">
+        <div className="article-page outline">
             <div>
                 <button onClick={() => {
                     navigate(`/edit/${article.id}`);
@@ -53,7 +53,7 @@ const img = images[val.key];
                 {[...article.infoboxFields].map((val, i) => {
                     return (
                         <>
-                        <div className="flex row">
+                        <div className="flex row infobox-field">
                            <p style={{fontWeight: "bold"}}>{val.key}</p>
                         <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(val.value) ?? ""}}></p>  
                         </div>

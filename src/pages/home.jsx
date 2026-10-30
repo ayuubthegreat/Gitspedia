@@ -66,8 +66,7 @@ return (
                 <h2>Want to write for us?</h2>
                 <p>The best time to apply is all the time!</p>
                 </div>
-            
-            <button>Submit application</button>
+            <Link to='/register'>Submit Application</Link>
         </div>
         <div className='outline'>
             <div className='textbox'>

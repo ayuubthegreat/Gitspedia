@@ -6,11 +6,19 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-top: 20px;
 }
 .infobox {
     border: 5px solid black;
     max-width: 400px;
     align-items: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.infobox-field {
+    border-bottom: 2px solid black;
+    width: 100%;
 }
 .opening-article-content {
     display: flex;
