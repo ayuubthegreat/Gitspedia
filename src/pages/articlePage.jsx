@@ -10,9 +10,9 @@ const ArticlePage = ({article}) => {
         <>
         <div className="article-page">
             <div>
-                {/* <button onClick={() => {
+                <button onClick={() => {
                     navigate(`/edit/${article.id}`);
-                }}>Edit Article</button> */}
+                }}>Edit Article</button>
             </div>
             <div className="opening-article-content">
              <div className="page">
@@ -27,7 +27,7 @@ const ArticlePage = ({article}) => {
                 return (
                     <>
                     <h2>{val.key}</h2>
-                    <p>{val.value}</p>
+                    <p dangerouslySetInnerHTML={{__html: val.value}}></p>
                     </>
                 )
                })}
@@ -68,7 +68,7 @@ const img = images[val.key];
                 return (
                     <>
                     <h2 style={{marginLeft: "50px"}}>{val.key}</h2>
-                    <p style={{marginLeft: "80px"}}>{val.value}</p>
+                    <p style={{marginLeft: "80px"}} dangerouslySetInnerHTML={{__html: val.value}}></p>
                     </>
                 )
                })}

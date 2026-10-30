@@ -20,14 +20,18 @@ const Navbar = () => {
             </div>
             <div className="nav-search">
                  <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
-        {[...filteredArticles].map((val) => {
+        <div className="search-result-box">
+            {[...filteredArticles].map((val) => {
             return (
-                <div className='search-result pointer'>
+                <div className='search-result pointer' onClick={() => {
+                    nav(`/${val.slug}`);
+                }}>
                     <p>{val.title}</p>
                     <p>{val.short_desc}</p>
                 </div>
             )
-        })}
+        })} 
+        </div>
             </div>
         </nav>
         </>

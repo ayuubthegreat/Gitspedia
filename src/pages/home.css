@@ -6,3 +6,19 @@
     padding: 20px;
     background-color: white;
 }
+.search-result-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search-result {
+    background-color: rgb(240, 227, 207);
+    padding: 3px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    width: 100%;
+    max-width: 300px;
+}
+.search-result:hover {
+    background-color: rgb(224, 213, 197);
+}

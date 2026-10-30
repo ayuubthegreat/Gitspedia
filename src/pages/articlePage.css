@@ -5,6 +5,7 @@
 .article-page {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 .infobox {
     border: 5px solid black;
@@ -13,6 +14,7 @@
 }
 .opening-article-content {
     display: flex;
+    
 }
 .opening-article-content div {
     padding: 20px;
@@ -20,8 +22,20 @@
 .small-screen-content {
     display: none;
 }
+
 @media screen and (max-width: 768px) {
+    .opening-article-content {
+        flex-direction: column;
+        align-items: center;
+    }
     .infobox {
         max-width: 100%;
+    }
+    .large-screen-content {
+        display: none;
+    }
+    .small-screen-content {
+        display: flex;
+        flex-direction: column;
     }
 }

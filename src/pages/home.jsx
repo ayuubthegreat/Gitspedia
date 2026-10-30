@@ -29,7 +29,8 @@ return (
         <div className='main-article-search outline'>
             <h3>Search for any article</h3>
         <SearchBar onChange={(e) => {setFilteredArticles(filterArticles(e.currentTarget.value, articles));}} />
-        {[...filteredArticles].map((val) => {
+        <div className='search-result-box'>
+            {[...filteredArticles].map((val) => {
             return (
                 <div className='search-result pointer' onClick={() => {
                     nav(`/${val.slug}`);
@@ -38,7 +39,9 @@ return (
                     <p>{val.short_desc}</p>
                 </div>
             )
-        })}
+        })} 
+        </div>
+       
         </div>
         <div className='info friendly'>
             <p>If you want to know more about Gitspedia or any of our projects, look up the article. <strong>It only takes a few seconds, but the reading will last you a few hours.</strong></p>
