@@ -15,9 +15,7 @@ nav {
 .nav-title-parent:hover {
     padding: 5px 10px;
 }
-.screen-result-box {
-    position: fixed;
-}
+
 @media (max-width: 650px) {
     .nav-search {
         display: none;
