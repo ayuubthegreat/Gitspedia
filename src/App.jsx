@@ -9,6 +9,8 @@ import Footer from './components/Footer.jsx'
 import CreateArticlePage from './pages/createArticle.jsx'
 import PageNotFound from './pages/pageNotFound.jsx'
 import ArticlePage from './pages/articlePage.jsx'
+import LoginPage from './pages/loginPage.jsx'
+import RegisterPage from './pages/registerForm.jsx'
 
 function App() {
     const {articles, filteredArticle} = useSelector((state) => state.articles)
@@ -45,6 +47,8 @@ function App() {
                             )
                         })}
                         <Route path='/create' element={<CreateArticlePage/>}/>
+                        <Route path="/login" element={<LoginPage/>}/>
+                        <Route path="/register" element={<RegisterPage/>}/>
                         <Route path='*' element={<PageNotFound/>}/>
                     </Routes>
                 </main>
