@@ -26,11 +26,12 @@ return (
     <div className='flex main-header full center-text main-section outline' style={{marginBottom: "10px", marginTop: "50px"}}>
         <h1 style={{backgroundColor: "gray", color: "white", padding: "20px"}} className='heading-text middle'>Welcome to {BASE_DATA.WEBSITE_NAME}!</h1>
         <h3 className='subheading-text'>The official encyclopedia of {BASE_DATA.STUDIO_NAME}</h3>
-        <div className='info'>
+        <div className='info friendly'>
             <p>If you want to know more about Gitspedia or any of our projects, look up the article. <strong>It only takes a few seconds, but the reading will last you a few hours.</strong></p>
         </div>
-        <div className='info'>
-            <p>Don't have time to read a full article? {BASE_DATA.STUDIO_NAME}</p>
+        <div className='info friendly'>
+            <p>Don't have time to read a full article? {BASE_DATA.WEBSITE_NAME} has got you covered!</p>
+            <Link to={"/ai-summaries"}>Learn About AI Summaries</Link>
         </div>
         <div className='main-article-search'>
             <h3>Search for any article</h3>
@@ -51,7 +52,7 @@ return (
             <p>Start off with our recommendations!</p>
             </div>
             
-           <div className='info'>
+           <div className='info uh-oh'>
             <p>Recommendations are coming soon. Please check back later!</p>
            </div>
     </div>

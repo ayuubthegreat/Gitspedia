@@ -103,6 +103,7 @@ a {
 button:hover,a:hover {
 	background-color: gray;
 	color: white;
+	cursor: pointer;
 }
 .popup {
 	position: fixed;
@@ -115,15 +116,22 @@ button:hover,a:hover {
 .outline {
 	border: 5px solid black;
 	border-radius: 10px;
+	background-color: white;
 }
 .textbox h1 {
 	padding: 0px;
 }
 .info {
-	background-color: coral;
-	padding: 0px 5px;
+	
+	padding: 5px 5px;
 	border-radius: 10px;
 	margin-bottom: 30px;
+}
+.friendly {
+	background-color: lightgreen;
+}
+.uh-oh {
+ background-color: coral;
 }
 
 @media screen and (max-width: 768px) {
