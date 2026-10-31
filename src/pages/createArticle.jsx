@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const CreateArticlePage = ({article}) => {
+const CreateArticlePage = ({article = null}) => {
     const {
         register,
         handleSubmit,
