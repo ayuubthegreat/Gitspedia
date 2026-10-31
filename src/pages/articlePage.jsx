@@ -3,7 +3,8 @@ import { DescriptiveImage } from "../components/DescriptiveImage";
 import DOMPurify from "dompurify";
 import "./articlePage.css"
 import { useSelector } from "react-redux";
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
+import { ArrowBigRight, ArrowDown, ArrowRight } from "lucide-react";
 
 
 const ArticlePage = ({article}) => {
@@ -72,11 +73,17 @@ const img = images[val.key];
             </div>
             </div>
             <div className="page small-screen-content">
-               {[...article.content].map((val) => {
+               {[...article.content].map((val, i) => {
+                const paragraph = document.getElementById(`paragraph-${i}`);
                 return (
                     <>
-                    <h2 style={{marginLeft: "50px"}}>{val.key}</h2>
-                    <p style={{marginLeft: "80px"}} dangerouslySetInnerHTML={{__html: val.value}}></p>
+                    <h2 className="paragraph-header pointer" style={{marginLeft: "10px"}} onClick={(e) => {
+                        if (paragraph != null) {
+                            paragraph.classList.toggle("hidden");
+                            console.log(isParagraphHidden);
+                        }
+                    }}> <ArrowDown/>{val.key}</h2>
+                    <p id={`paragraph-${i}`} className="hidden" style={{marginLeft: "30px"}} dangerouslySetInnerHTML={{__html: val.value}}></p>
                     </>
                 )
                })}

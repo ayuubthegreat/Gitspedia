@@ -27,10 +27,17 @@
     
 }
 .opening-article-content div {
-    padding: 20px;
+    padding: 10px;
 }
 .small-screen-content {
     display: none;
+}
+.paragraph-header {
+    transition: background-color 0.2s,padding 0.2s;
+}
+.paragraph-header:hover {
+ background-color: rgb(199, 198, 198);
+ padding: 10px 20px;
 }
 
 @media screen and (max-width: 768px) {
