@@ -83,7 +83,7 @@ const img = images[val.key];
                             console.log(isParagraphHidden);
                         }
                     }}> <ArrowDown/>{val.key}</h2>
-                    <p id={`paragraph-${i}`} className="hidden" style={{marginLeft: "30px"}} dangerouslySetInnerHTML={{__html: val.value}}></p>
+                    <p id={`paragraph-${i}`} style={{marginLeft: "30px"}} dangerouslySetInnerHTML={{__html: val.value}}></p>
                     </>
                 )
                })}
