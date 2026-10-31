@@ -29,6 +29,7 @@ export const Article_SuccessCase = (state, action) => {
 }
 export const User_SuccessCase = (state, action) => {
     state.loading = false
+    state.successMessage = action.payload.message;
     console.log(action);
 }
 export const Comments_SuccessCase = (state, action) => {
@@ -39,6 +40,6 @@ export const Comments_SuccessCase = (state, action) => {
 }
 export const FailedCase = (state, action) => {
     state.loading = false
-    state.error = action.payload
-    console.error("Error:", action.payload)
+    state.error = action.payload.message
+    console.error("Error:", action)
 }

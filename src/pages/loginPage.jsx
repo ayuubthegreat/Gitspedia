@@ -6,7 +6,7 @@ import "./loginPage.css"
 import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const LoginPage = () => {
@@ -19,10 +19,14 @@ const LoginPage = () => {
         resolver: zodResolver(loginSchema)
     });
     const [showPassword, setShowPassword] = useState(false);
+    const {successMessage, error} = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const onSubmit = async function(data) {
+        const dialogBackdrop = document.getElementById("dialog-backdrop");
+
         try {
             await dispatch(LoginUser({loginData: data})).unwrap();
+            dialogBackdrop.classList.remove("hidden");
             reset();
         } catch (error) {
             alert(error.message ?? error);
@@ -30,6 +34,12 @@ const LoginPage = () => {
     }
     return (
         <>
+        <div id="dialog-backdrop" className="backdrop hidden">
+            <div className="outline flex">
+                <h1>Login successful!</h1>
+                <h3>{successMessage}</h3>
+            </div>
+        </div>
         <div className="login-page outline flex center-text">
             <div className="heading">
                 <h2>Login</h2>
@@ -49,6 +59,11 @@ const LoginPage = () => {
                 <button type="submit">Login</button>
             </div>
             </form>
+           {error !== null && (<>
+           <div className="info uh-oh">
+            <p>{error}</p>
+           </div>
+           </>)}
             <div className="info uh-oh">
                <p>If your username and password is not working, <strong>please contact {BASE_DATA.STUDIO_NAME}.</strong></p> 
                <Link to={"https://www.crescentmoonstudios.com/contact"}>Contact Us</Link>

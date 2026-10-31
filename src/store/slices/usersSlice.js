@@ -18,6 +18,7 @@ export const loginSchema = z.object({
 export const initialState = {
     user: null,
     error: null,
+    successMessage: null,
     loading: false
 }
 
