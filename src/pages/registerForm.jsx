@@ -3,7 +3,8 @@ import { BASE_DATA } from "../BASE_DATA";
 import "./registerForm.css"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GetUsers, RegisterUser, userSchema } from "../store/slices/usersSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 const RegisterPage = () => {
@@ -15,6 +16,7 @@ const RegisterPage = () => {
     } = useForm({
         resolver: zodResolver(userSchema)
     });
+    const {successMessage} = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const onSubmit = async (data) => {
         data.role = "PENDING_APPROVAL";
@@ -31,6 +33,29 @@ const RegisterPage = () => {
     return (
         <>
         <div className="register-page page">
+            {successMessage !== null && (<>
+            
+            
+            </>)}
+            <div className="backdrop flex middle">
+                <div className="dialog-register outline center-text flex middle">
+                    <h1>Register successful</h1>
+                    <p>{successMessage}</p>
+                    <p>Your form has been submitted to {BASE_DATA.STUDIO_NAME}. Please wait a few days for approval. <br></br> We appreciate your request! Please visit our company website to learn more about how we roll!</p>
+                   
+                    <div className="flex row">
+                       <Link to={"https://www.crescentmoonstudios.com"}>Our Company Website</Link>
+                    <Link to={"/"}>Exit</Link> 
+                    </div> 
+                    <div className="info uh-oh">
+                        <h3>Your satisfaction matters</h3>
+                        <p>If you have incorrectly filled out the registration form, please contact us--your satisfaction is paramount <i>(important)</i>. </p>
+                        <Link to={"https://www.crescentmoonstudios.com"}
+                    </div>
+                    
+            </div>
+            </div>
+            
             <div className="center-text">
                 <h1>Register Page</h1>
                 <p>We at {BASE_DATA.WEBSITE_NAME} love new editors and writers!</p>

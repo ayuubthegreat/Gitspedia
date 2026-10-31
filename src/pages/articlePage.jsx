@@ -2,18 +2,26 @@ import { useNavigate } from "react-router-dom";
 import { DescriptiveImage } from "../components/DescriptiveImage";
 import DOMPurify from "dompurify";
 import "./articlePage.css"
+import { useSelector } from "react-redux";
+import { useReducer } from "react";
 
 
 const ArticlePage = ({article}) => {
     const navigate = useNavigate();
+    const {user} = useSelector((state) => state.user);
     return (
         <>
         <div className="article-page outline">
-            <div>
+            {user && user.role === "SUPERADMIN" && (
+                <> 
+                <div>
                 <button onClick={() => {
                     navigate(`/edit/${article.id}`);
                 }}>Edit Article</button>
             </div>
+                </>
+            )}
+           
             <div className="opening-article-content">
              <div className="page">
                  <div>

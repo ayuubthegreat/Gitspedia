@@ -12,6 +12,7 @@ import ArticlePage from './pages/articlePage.jsx'
 import LoginPage from './pages/loginPage.jsx'
 import RegisterPage from './pages/registerForm.jsx'
 import { LoginUserByID } from './store/slices/usersSlice.js'
+import AuthenticationFirewall from '../middleware/AuthenticationFirewall.jsx'
 
 function App() {
     const {articles, filteredArticle} = useSelector((state) => state.articles)
@@ -49,11 +50,11 @@ function App() {
                             return (
                                 <> 
                                 <Route path={`/${val.slug}`} element={<ArticlePage article={val}/>}/>
-                                <Route path={`/edit/${val.id}`} element={<CreateArticlePage article={val}/>}/>
+                                <Route path={`/edit/${val.id}`} element={<AuthenticationFirewall children={<CreateArticlePage article={val}/>} needsAuthentication={true}/>}/>
                                 </>
                             )
                         })}
-                        <Route path='/create' element={<CreateArticlePage/>}/>
+                        <Route path='/create' element={<AuthenticationFirewall children={<CreateArticlePage/>} needsAuthentication={true}/>}/>
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route path="/register" element={<RegisterPage/>}/>
                         <Route path='*' element={<PageNotFound/>}/>

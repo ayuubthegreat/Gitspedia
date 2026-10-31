@@ -18,3 +18,6 @@
 .register-section textarea {
     height: 200px;
 }
+.dialog-register {
+    padding: 2vw;
+}
