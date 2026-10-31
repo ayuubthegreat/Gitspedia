@@ -4,7 +4,8 @@ import "./registerForm.css"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GetUsers, RegisterUser, userSchema } from "../store/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 const RegisterPage = () => {
@@ -17,14 +18,18 @@ const RegisterPage = () => {
         resolver: zodResolver(userSchema)
     });
     const {successMessage} = useSelector((state) => state.user);
+    const [userRegistered, setUserRegistered] = useState(null);
     const dispatch = useDispatch();
+    const nav = useNavigate();
     const onSubmit = async (data) => {
+        const dialogRegister = document.getElementById("dialog-register");
         data.role = "PENDING_APPROVAL";
         data.websiteName = "Gitspedia"
         console.log(data);
         try {
             await dispatch(RegisterUser({loginData: data})).unwrap();
-            await dispatch(GetUsers()).unwrap();
+            dialogRegister.classList.remove("hidden");
+            setUserRegistered(data);
             reset();
         } catch (error) {
             alert(error);
@@ -33,28 +38,23 @@ const RegisterPage = () => {
     return (
         <>
         <div className="register-page page">
-            {successMessage !== null && (<>
-            
-            
-            </>)}
-            <div className="backdrop flex middle">
+            <div id="dialog-register" className="backdrop flex middle hidden">
                 <div className="dialog-register outline center-text flex middle">
                     <h1>Register successful</h1>
                     <p>{successMessage}</p>
-                    <p>Your form has been submitted to {BASE_DATA.STUDIO_NAME}. Please wait a few days for approval. <br></br> We appreciate your request! Please visit our company website to learn more about how we roll!</p>
-                   
+                    <p>Your form has been submitted to {BASE_DATA.STUDIO_NAME}. Nice to meet you, {userRegistered ? userRegistered.firstName : "undefined"} Please wait a few days for an approval e-mail. <br></br> We appreciate your request! Please visit our company website to learn more about how we roll!</p>
                     <div className="flex row">
                        <Link to={"https://www.crescentmoonstudios.com"}>Our Company Website</Link>
                     <Link to={"/"}>Exit</Link> 
                     </div> 
                     <div className="info uh-oh">
                         <h3>Your satisfaction matters</h3>
-                        <p>If you have incorrectly filled out the registration form, please contact us--your satisfaction is paramount <i>(important)</i>. </p>
-                        <Link to={"https://www.crescentmoonstudios.com"}
+                        <p>If you have incorrectly filled out the registration form, please contact us--your satisfaction is paramount <i>(important)</i>.<br></br> Don't be shy--we want to hear from you! </p>
+                        <Link to={"https://www.crescentmoonstudios.com/contact"}>Contact Us</Link>
                     </div>
-                    
             </div>
             </div>
+            
             
             <div className="center-text">
                 <h1>Register Page</h1>

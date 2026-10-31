@@ -52,6 +52,9 @@ const Navbar = () => {
            
         </div>
             </div>
+            {user && user.role === "SUPERADMIN" && (<>
+            <Link to={"/create"}>Create</Link>
+            </>)}
             {!user && (<>
              <div className="nav-links flex row">
                 <Link to={"/login"}>Login</Link>
