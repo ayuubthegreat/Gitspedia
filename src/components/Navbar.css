@@ -20,8 +20,13 @@ nav {
     gap: 20px;
 }
 .nav-search {
+    position: relative;
     padding: 5px;
     background-color: aliceblue;
+}
+.nav-search .search-result-box {
+    left: 5px;
+    width: 30vw;
 }
 @media (max-width: 768px) {
     .nav-search {

@@ -3,6 +3,7 @@
     height: 40px;
 }
 .main-article-search {
+    position: relative;
     padding: 20px;
     background-color: white;
 }
@@ -12,13 +13,16 @@
     flex-direction: column;
     align-items: center;
 }
+.main-article-search .search-result-box {
+    left: 20px;
+    width: calc((100% - 40px) * 0.8);
+}
 .search-result {
     background-color: rgb(240, 227, 207);
     padding: 3px;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
     width: 100%;
-    max-width: 300px;
 }
 .search-result:hover {
     background-color: rgb(224, 213, 197);
