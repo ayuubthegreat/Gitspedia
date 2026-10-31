@@ -61,6 +61,7 @@ export const LoginUserByID = createAsyncThunk(
     async(userID, {rejectWithValue}) => {
         try {
             const response = await APICall({endpoint: `auth/user/${userID}`, method: "GET"});
+            return response;
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -74,6 +75,7 @@ export const UsersSlice = createSlice({
     reducers: {
         logout: (state, action) => {
             state.user = null;
+            localStorage.removeItem("user");
         }
     },
     extraReducers: (builder) => {
@@ -97,5 +99,6 @@ export const UsersSlice = createSlice({
         .addCase(LoginUserByID.rejected, FailedCase)
     }
 })
+export const {logout} = UsersSlice.actions;
 export default UsersSlice.reducer
 

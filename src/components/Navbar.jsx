@@ -4,7 +4,9 @@ import './Navbar.css'
 import { Link, useNavigate } from "react-router-dom";
 import { filterArticles } from "../pages/home";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LogOut } from "lucide-react";
+import { logout } from "../store/slices/usersSlice";
 
 const Navbar = () => {
     const nav = useNavigate();
@@ -12,6 +14,7 @@ const Navbar = () => {
     const {user} = useSelector((state) => state.user);
     const [filteredArticles, setFilteredArticles] = useState([]);
     const [isEmpty, setIsEmpty] = useState(true);
+    const dispatch = useDispatch();
     return (
         <>
         <nav>
@@ -49,15 +52,25 @@ const Navbar = () => {
            
         </div>
             </div>
-            <div className="nav-links flex row">
+            {!user && (<>
+             <div className="nav-links flex row">
                 <Link to={"/login"}>Login</Link>
             <Link to={"/register"}>Apply</Link> 
             </div>
+            </>)}
+           
             <div>
                 {user && (<>
-                <div>
+                <div className="flex row">
                     <h3>Welcome, {user.username}!</h3>
-                    <button>Logout</button>
+                    <button onClick={() => {
+                        try {
+                           dispatch(logout()); 
+                           nav('/login'); 
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }}><LogOut/></button>
                 </div>
                 </>)}
             </div>

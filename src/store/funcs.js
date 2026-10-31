@@ -29,8 +29,9 @@ export const Article_SuccessCase = (state, action) => {
 }
 export const User_SuccessCase = (state, action) => {
     state.loading = false
-    state.successMessage = action.payload.message;
-    console.log(action);
+    state.user = action.payload.data;
+    localStorage.setItem("user", action.payload.data.id);
+  
 }
 export const Comments_SuccessCase = (state, action) => {
      state.loading = false

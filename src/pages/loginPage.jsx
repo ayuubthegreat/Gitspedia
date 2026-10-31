@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { BASE_DATA } from "../BASE_DATA";
 import { loginSchema, LoginUser, userSchema } from "../store/slices/usersSlice";
 import "./loginPage.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const {successMessage, error} = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const nav = useNavigate();
     const onSubmit = async function(data) {
         const dialogBackdrop = document.getElementById("dialog-backdrop");
 
@@ -28,6 +29,9 @@ const LoginPage = () => {
             await dispatch(LoginUser({loginData: data})).unwrap();
             dialogBackdrop.classList.remove("hidden");
             reset();
+            setTimeout(() => {
+                nav('/');
+            }, 1000)
         } catch (error) {
             alert(error.message ?? error);
         }
