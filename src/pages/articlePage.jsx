@@ -12,6 +12,7 @@ const ArticlePage = ({article}) => {
     const {user} = useSelector((state) => state.user);
     return (
         <>
+        <title>{article.title} | Gitspedia</title>
         <div className="article-page outline">
             {user && user.role === "SUPERADMIN" && (
                 <> 
