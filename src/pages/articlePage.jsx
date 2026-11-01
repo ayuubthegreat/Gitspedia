@@ -10,9 +10,10 @@ import { ArrowBigRight, ArrowDown, ArrowRight } from "lucide-react";
 const ArticlePage = ({article}) => {
     const navigate = useNavigate();
     const {user} = useSelector((state) => state.user);
+    const title = article.title + " | Gitspedia";
     return (
         <>
-        <title>{article.title} | Gitspedia</title>
+        <title>{title}</title>
         <div className="article-page outline">
             {user && user.role === "SUPERADMIN" && (
                 <> 

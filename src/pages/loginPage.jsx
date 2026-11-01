@@ -38,6 +38,7 @@ const LoginPage = () => {
     }
     return (
         <>
+        <title>{`Login | ${BASE_DATA.WEBSITE_NAME}`}</title>
         <div id="dialog-backdrop" className="backdrop hidden">
             <div className="outline flex">
                 <h1>Login successful!</h1>

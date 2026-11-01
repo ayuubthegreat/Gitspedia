@@ -12,7 +12,7 @@
 }
 .infobox {
     border: 5px solid black;
-    max-width: 400px;
+    min-width: 300px;
     align-items: right;
     display: flex;
     flex-direction: column;
@@ -21,6 +21,7 @@
 .infobox-field {
     border-bottom: 2px solid black;
     width: 100%;
+    margin: 10px 0;
 }
 .opening-article-content {
     display: flex;

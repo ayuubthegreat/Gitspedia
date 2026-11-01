@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const CreateArticlePage = ({article = null}) => {
+    const title = article ? article.title + " | Gitspedia" : "Create Article | Gitspedia";
     const {
         register,
         handleSubmit,
@@ -156,6 +157,7 @@ const CreateArticlePage = ({article = null}) => {
    
     return (
         <>
+        <title>{title}</title>
         {popUpPosition && (<div className="popup" style={{left: popUpPosition.x, right: popUpPosition.y + 8}}>
                     <button type="button">X</button>
                     {renderPopupGraphics()}

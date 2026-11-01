@@ -37,6 +37,7 @@ const RegisterPage = () => {
     }
     return (
         <>
+        <title>{`Register | ${BASE_DATA.WEBSITE_NAME}`}</title>
         <div className="register-page page">
             <div id="dialog-register" className="backdrop flex middle hidden">
                 <div className="dialog-register outline center-text flex middle">

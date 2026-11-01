@@ -22,6 +22,7 @@ const HomePage = () => {
     const nav = useNavigate();
 return (
     <>
+    <title>{`Home | ${BASE_DATA.WEBSITE_NAME}`}</title>
     <div className='flex main-header full center-text main-section outline' style={{marginBottom: "10px", marginTop: "50px"}}>
         <h1 style={{backgroundColor: "gray", color: "white", padding: "20px"}} className='heading-text middle'>Welcome to {BASE_DATA.WEBSITE_NAME}!</h1>
         <h3 className='subheading-text'>The official encyclopedia of {BASE_DATA.STUDIO_NAME}</h3>
