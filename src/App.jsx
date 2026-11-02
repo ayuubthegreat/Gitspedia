@@ -56,8 +56,6 @@ function App() {
                             )
                         })}
                         <Route path='/create' element={<AuthenticationFirewall children={<CreateArticlePage/>} needsAuthentication={true}/>}/>
-                        <Route path="/login" element={<LoginPage/>}/>
-                        <Route path="/register" element={<RegisterPage/>}/>
                         <Route path="/auth/*" element={<AuthPage/>}/>
                         <Route path='*' element={<PageNotFound/>}/>
                     </Routes>

@@ -69,7 +69,7 @@ const Navbar = () => {
                     <button onClick={() => {
                         try {
                            dispatch(logout()); 
-                           nav('/login'); 
+                           nav('/'); 
                         } catch (error) {
                             console.error(error);
                         }
