@@ -57,8 +57,8 @@ const Navbar = () => {
             </>)}
             {!user && (<>
              <div className="nav-links flex row">
-                <Link to={"/login"}>Login</Link>
-            <Link to={"/register"}>Apply</Link> 
+                <Link to={"https://www.crescentmoonstudios.com/login/gitspedia"}>Login</Link>
+            <Link to={"https://www.crescentmoonstudios.com/register"}>Apply</Link> 
             </div>
             </>)}
            
